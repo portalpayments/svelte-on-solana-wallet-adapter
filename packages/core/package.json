@@ -1,43 +1,40 @@
 {
-    "name": "@svelte-on-solana/wallet-adapter-core",
-    "version": "1.0.11-alpha.0",
-    "author": "Svelte on Solana",
-    "repository": "https://github.com/svelte-on-solana/wallet-adapter",
-    "license": "Apache-2.0",
-    "type": "module",
-    "sideEffects": false,
-    "main": "lib/cjs/index.js",
-    "module": "lib/esm/index.mjs",
-    "types": "lib/esm/index.d.ts",
-    "exports": {
-        "import": "./lib/esm/index.mjs",
-        "require": "./lib/cjs/index.js"
-    },
-    "files": [
-        "lib",
-        "src",
-        "LICENSE"
-    ],
-    "publishConfig": {
-        "access": "public"
-    },
-    "scripts": {
-        "clean": "shx rm -rf lib/*",
-        "build": "yarn clean && tsc -p tsconfig.json; tsc-esm -p tsconfig.json && tsc -p tsconfig.cjs.json",
-        "postbuild": "echo '{\"type\":\"commonjs\"}' | npx json > lib/cjs/package.json && echo '{\"type\":\"module\"} ' | npx json > lib/esm/package.json"
-    },
-    "dependencies": {
-        "@types/node-fetch": "^2.6.2",
-        "@solana/wallet-adapter-base": "^0.9.19",
-        "@solana/web3.js": "^1.70.0",
-        "eventemitter3": "^4.0.7",
-        "svelte": "^3.0.0"
-    },
-    "keywords": [
-        "svelte",
-        "wallet",
-        "adapter",
-        "wallet-adapter",
-        "solana"
-    ]
+  "name": "@svelte-on-solana/wallet-adapter-core",
+  "version": "2.0.0",
+  "author": "Svelte on Solana team",
+  "repository": "https://github.com/svelte-on-solana/wallet-adapter",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "shx rm -rf dist/*",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@solana/wallet-adapter-base": "^0.9.19",
+    "@solana/web3.js": "^1.70.0",
+    "@types/node-fetch": "^2.6.2",
+    "eventemitter3": "^4.0.7",
+    "svelte": "^3.0.0"
+  },
+  "keywords": [
+    "svelte",
+    "wallet",
+    "adapter",
+    "wallet-adapter",
+    "solana"
+  ],
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js"
+  }
 }

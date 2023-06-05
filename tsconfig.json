@@ -1,26 +1,26 @@
 {
-    "include": ["packages/*/src"],
-    "exclude": ["node_modules", "packages/*/node_modules"],
-    "compilerOptions": {
-        "target": "es2019",
-        "module": "esnext",
-        "noEmit": true,
-        "declaration": true,
-        "sourceMap": true,
-        "noEmitOnError": true,
-        "stripInternal": true,
-        "moduleResolution": "node",
-        "jsx": "react",
-        "strict": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "typeRoots": ["node_modules/@types"]
-    },
-    "typedocOptions": {
-        "entryPoints": ".",
-        "entryPointStrategy": "packages",
-        "out": "docs",
-        "readme": "README.md"
-    }
+  "include": ["packages/*/src"],
+  "exclude": ["node_modules", "packages/*/node_modules"],
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "esnext",
+    "noEmit": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "stripInternal": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+    // "typeRoots": ["node_modules/@types"]
+  },
+  "typedocOptions": {
+    "entryPoints": ".",
+    "entryPointStrategy": "packages",
+    "out": "docs",
+    "readme": "README.md"
+  }
 }
