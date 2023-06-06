@@ -1,23 +1,55 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+:root {
+   
+  /* 
+  --text-color: white;
+  --background-color: #512da8;
+  
+  --disabled-text-color: #999;
+  --disabled-background-color: #404144;
+
+  --hover-background-color: #1a1f2e;
+  --fonts: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  --height: 48px;
+  --border: none;
+  --border-radius: "4px";
+  --modal-background-color: #10141f;
+   */
+  
+
+  --text-color: #222;
+  --background-color: transparent;
+
+  --disabled-text-color: #999;
+  --disabled-background-color: transparent;
+
+  --hover-background-color: transparent;
+  --fonts: "Inter";
+  --height: 48px;
+  --border: 0.5px solid #999;
+  --border-radius: calc(var(--height) / 2); 
+  --modal-background-color: white;
+  
+}
 
 .wallet-adapter-button {
   background-color: transparent;
-  border: none;
-  color: #fff;
+  border: var(--border);
+  color: var(--text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--fonts);
   font-size: 16px;
   font-weight: 600;
-  height: 48px;
-  line-height: 48px;
+  height: var(--height);;
+  line-height: var(--height);;
   padding: 0 24px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 .wallet-adapter-button-trigger {
-  background-color: #512da8;
+  background-color: var(--background-color);
 }
 
 .wallet-adapter-button:not([disabled]):focus-visible {
@@ -25,12 +57,12 @@
 }
 
 .wallet-adapter-button:not([disabled]):hover {
-  background-color: #1a1f2e;
+  background-color: var(--hover-background-color);
 }
 
 .wallet-adapter-button[disabled] {
-  background: #404144;
-  color: #999;
+  background: var(--disabled-background-color);
+  color: var(--disabled-text-color);
   cursor: not-allowed;
 }
 
@@ -79,7 +111,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--fonts);
 }
 
 .wallet-adapter-dropdown-list-active {
@@ -104,11 +136,11 @@
   font-size: 14px;
   font-weight: 600;
   height: 37px;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .wallet-adapter-dropdown-list-item:not([disabled]):hover {
-  background-color: #1a1f2e;
+  background-color: var(--hover-background-color);
 }
 
 .wallet-adapter-modal-collapse-button svg {
@@ -147,7 +179,7 @@
   right: 18px;
   padding: 12px;
   cursor: pointer;
-  background: #1a1f2e;
+  background: var(--hover-background-color);
   border: none;
   border-radius: 50%;
 }
@@ -198,9 +230,9 @@
   z-index: 1050;
   max-width: 400px;
   border-radius: 10px;
-  background: #10141f;
+  background: var(--modal-background-color);
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--fonts);
   flex: 1;
 }
 
@@ -215,7 +247,7 @@
   margin: 0;
   padding: 64px 48px 48px 48px;
   text-align: center;
-  color: #fff;
+  color: var(--text-color);
 }
 
 @media (max-width: 374px) {
@@ -259,8 +291,8 @@
   display: flex;
   align-items: center;
   background-color: transparent;
-  color: #fff;
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+  font-family: var(--fonts);
 }
 
 .wallet-adapter-modal-list-more svg {
@@ -291,10 +323,10 @@
   cursor: pointer;
   margin-top: 48px;
   width: 100%;
-  background-color: #512da8;
+  background-color: var(--background-color);
   padding: 12px;
   font-size: 18px;
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-color);
 }
