@@ -13,18 +13,22 @@
     modalVisible = false,
     copied = false;
 
-  $: base58 = publicKey && publicKey?.toBase58();
+  // Was 'base58'
+  $: walletAddress = publicKey && publicKey?.toBase58();
+
+  
   $: content = showAddressContent($walletStore);
 
   const copyAddress = async () => {
-    if (!base58) return;
-    await navigator.clipboard.writeText(base58);
+    if (!walletAddress) return;
+    await navigator.clipboard.writeText(walletAddress);
     copied = true;
     setTimeout(() => (copied = false), 400);
   };
 
   const openDropdown = () => (dropDrownVisible = true);
   const closeDropdown = () => (dropDrownVisible = false);
+
   const openModal = () => {
     modalVisible = true;
     closeDropdown();
@@ -32,9 +36,9 @@
   const closeModal = () => (modalVisible = false);
 
   function showAddressContent(store) {
-    const base58 = store.publicKey?.toBase58();
-    if (!store.wallet || !base58) return null;
-    return base58.slice(0, 4) + '..' + base58.slice(-4);
+    const walletAddress = store.publicKey?.toBase58();
+    if (!store.wallet || !walletAddress) return null;
+    return walletAddress.slice(0, 4) + '..' + walletAddress.slice(-4);
   }
 
   async function connectWallet(event) {
@@ -84,7 +88,7 @@
   <WalletButton class="wallet-adapter-button-trigger" on:click={openModal}>
     <slot>Select Wallet</slot>
   </WalletButton>
-{:else if !base58}
+{:else if !walletAddress}
   <WalletConnectButton />
 {:else}
   <div class="wallet-adapter-dropdown">
