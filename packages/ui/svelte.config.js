@@ -8,6 +8,15 @@ const config = {
   // for more information about preprocessors
   preprocess: preprocess(),
 
+  onwarn: (warning, handler) => {
+    if (warning.code === "a11y-click-events-have-key-events") {
+      // Ignore accessibility warnings
+      // TODO: fix properly
+      return;
+    }
+    handler(warning);
+  },
+
   kit: {
     // hydrate the <div id="svelte"> element in src/app.html
     adapter: adapter(),
