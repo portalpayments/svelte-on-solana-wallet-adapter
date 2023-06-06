@@ -27,7 +27,7 @@ npm i @svelte-on-solana/wallet-adapter-ui
 There are three components that you need to get set up:
 
 - `WalletProvider`
-- `ConnectionProvider` (`[AnchorConnectionProvider](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md)` if you're using Anchor)
+- `ConnectionProvider` ([`AnchorConnectionProvider`](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) if you're using Anchor)
 - `WalletMultiButton`
 
 `WalletProvider` is a component used to initialize the wallet stores and add event listeners
