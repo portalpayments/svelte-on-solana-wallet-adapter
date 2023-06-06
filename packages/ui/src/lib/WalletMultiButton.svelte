@@ -14,7 +14,7 @@
     copied = false;
 
   // Was 'base58'
-  $: walletAddress = publicKey && publicKey?.toBase58();
+  $: walletAddress = publicKey?.toBase58();
 
   
   $: content = showAddressContent($walletStore);
