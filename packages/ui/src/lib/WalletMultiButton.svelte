@@ -104,6 +104,8 @@
       {content}
     </WalletButton>
     {#if dropDrownVisible}
+      <!-- TODO: fix accessability and remove the warning below -->
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <ul
         aria-label="dropdown-list"
         class="wallet-adapter-dropdown-list wallet-adapter-dropdown-list-active"
