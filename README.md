@@ -4,7 +4,7 @@
 
 Modular TypeScript wallet adapter and UI components for Solana/Anchor applications using [SvelteJS](https://svelte.dev/) as framework. This package contains a solution for [SvelteKit](https://kit.svelte.dev/), making it possible to build Solana Dapps in SPA or SSR mode.
 
-[View demo](https://github.com/silvestrevivo/solana-svelte-counter/) / [Browse demo code](https://solana-svelte-counter.netlify.app/)
+[View demo](https://solana-svelte-counter.netlify.app/) / [Browse demo code](https://github.com/silvestrevivo/solana-svelte-counter/)
 
 ## Packages
 
