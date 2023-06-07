@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@svelte-on-solana/wallet-adapter",
+  "name": "@portal-payments/wallet-adapter",
   "author": "Svelte on Solana team",
   "repository": "https://github.com/svelte-on-solana/wallet-adapter",
   "license": "Apache-2.0",

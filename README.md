@@ -1,6 +1,8 @@
-# `@svelte-on-solana/wallet-adapter`
+# `@portal-payments/wallet-adapter`
 
-![Wallets](wallets-adapter.png)
+> A (hopefully temporary) fork of https://github.com/svelte-on-solana/wallet-adapter with a large amount of fixes, built for current JS standards and tooling (fixing warnings, using normal JS formatting, npm, ESM, current SvelteKit, updated documentation, etc).
+
+Updated original docs below:
 
 Modular TypeScript wallet adapter and UI components for Solana/Anchor applications using [SvelteJS](https://svelte.dev/) as framework. This package contains a solution for [SvelteKit](https://kit.svelte.dev/), making it possible to build Solana Dapps in SPA or SSR mode.
 

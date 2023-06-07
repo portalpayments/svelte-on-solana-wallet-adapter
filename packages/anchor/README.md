@@ -1,13 +1,13 @@
-# `@svelte-on-solana/wallet-adapter-anchor`
+# `@portal-payments/wallet-adapter-anchor`
 
 `AnchorConnectionProvider` component and `workSpace` for Solana wallets using Svelte
 
 ## Installing
 
-You have already installed the core package to run the wallet Svelte Store [@svelte-on-solana/wallet-adapter-core](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/core/README.md) and the UI components to use the wallet [@svelte-on-solana/wallet-adapter-ui](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/ui/README.md/). Then install the `AnchorConnectionProvider` component and `workSpace` file contained in this package.
+You have already installed the core package to run the wallet Svelte Store [@portal-payments/wallet-adapter-core](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/core/README.md) and the UI components to use the wallet [@portal-payments/wallet-adapter-ui](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/ui/README.md/). Then install the `AnchorConnectionProvider` component and `workSpace` file contained in this package.
 
 ```shell
-npm i @svelte-on-solana/wallet-adapter-anchor
+npm i @portal-payments/wallet-adapter-anchor
 ```
 
 ## Set Up
@@ -46,9 +46,9 @@ In the **\_\_layout.svelte** component you can import the wallets and setup the 
 
 ```html
 <script lang="ts">
-  import { walletStore } from "@svelte-on-solana/wallet-adapter-core";
-  import { WalletProvider, WalletMultiButton } from "@svelte-on-solana/wallet-adapter-ui";
-  import { AnchorConnectionProvider, workSpace } from "@svelte-on-solana/wallet-adapter-anchor";
+  import { walletStore } from "@portal-payments/wallet-adapter-core";
+  import { WalletProvider, WalletMultiButton } from "@portal-payments/wallet-adapter-ui";
+  import { AnchorConnectionProvider, workSpace } from "@portal-payments/wallet-adapter-anchor";
   import { clusterApiUrl } from "@solana/web3.js";
   import idl from "../../../target/idl/<my-anchor-project>.json";
 
@@ -92,9 +92,9 @@ In `App.svelte` or the entry point of your SPA, you can setup the wallet and com
 
 ```html
 <script lang="ts">
-  import { walletStore } from "@svelte-on-solana/wallet-adapter-core";
-  import { WalletProvider, WalletMultiButton } from "@svelte-on-solana/wallet-adapter-ui";
-  import { AnchorConnectionProvider, workSpace } from "@svelte-on-solana/wallet-adapter-anchor";
+  import { walletStore } from "@portal-payments/wallet-adapter-core";
+  import { WalletProvider, WalletMultiButton } from "@portal-payments/wallet-adapter-ui";
+  import { AnchorConnectionProvider, workSpace } from "@portal-payments/wallet-adapter-anchor";
   import { clusterApiUrl } from "@solana/web3.js";
   import idl from "../../../target/idl/<my-anchor-project>.json";
   import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
@@ -116,7 +116,7 @@ In `App.svelte` or the entry point of your SPA, you can setup the wallet and com
 
 ## Example Implementation
 
-See example implementations of the `@svelte-on-solana/wallet-adapter-ui` library.
+See example implementations of the `@portal-payments/wallet-adapter-ui` library.
 
 - [Demo site][1]
 

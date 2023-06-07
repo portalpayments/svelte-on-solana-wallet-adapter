@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Adapter } from '@solana/wallet-adapter-base';
-	import { initialize } from '@svelte-on-solana/wallet-adapter-core';
+	import { initialize } from '@portal-payments/wallet-adapter-core';
 	import type { WalletError } from '@solana/wallet-adapter-base';
 
 	export let localStorageKey: string,

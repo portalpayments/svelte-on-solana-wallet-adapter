@@ -1,6 +1,6 @@
 {
   "name": "@portal-payments/wallet-adapter-anchor",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Svelte on Solana team",
   "repository": "https://github.com/portalpayments/svelte-on-solana-wallet-adapter",
   "publishConfig": {

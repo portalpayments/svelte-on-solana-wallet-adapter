@@ -1,6 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
+  import { walletStore } from '@portal-payments/wallet-adapter-core';
   import { createEventDispatcher } from 'svelte';
   import WalletButton from './WalletButton.svelte';
   import type { WalletName } from '@solana/wallet-adapter-base';
