@@ -35,7 +35,7 @@
   };
   const closeModal = () => (modalVisible = false);
 
-  const showWalletNameOrTruncatedAddress = async (store) => {
+  const showWalletNameOrTruncatedAddress = (store) => {
     const walletAddress = store.publicKey?.toBase58();
     if (!store.wallet || !walletAddress) {
       return null; 
