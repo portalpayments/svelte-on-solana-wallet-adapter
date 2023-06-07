@@ -15,9 +15,8 @@
 
   // Was 'base58'
   $: walletAddress = publicKey?.toBase58();
-
   
-  $: content = showWalletNameOrTruncatedAddress($walletStore);
+  $: walletNameOrTruncatedAddress = showWalletNameOrTruncatedAddress($walletStore);
 
   const copyAddress = async () => {
     if (!walletAddress) return;
@@ -101,7 +100,7 @@
       <svelte:fragment slot="start-icon">
         <img src={wallet.icon} alt={`${wallet.name} icon`} />
       </svelte:fragment>
-      {content}
+      {walletNameOrTruncatedAddress}
     </WalletButton>
     {#if dropDrownVisible}
       <!-- TODO: fix accessability and remove the warning below -->
