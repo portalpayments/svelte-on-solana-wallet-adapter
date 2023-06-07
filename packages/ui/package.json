@@ -1,8 +1,8 @@
 {
-  "name": "@svelte-on-solana/wallet-adapter-ui",
+  "name": "@portal-payments/wallet-adapter-ui",
   "version": "2.0.0",
   "author": "Svelte on Solana team",
-  "repository": "https://github.com/svelte-on-solana/wallet-adapter",
+  "repository": "https://github.com/portalpayments/svelte-on-solana-wallet-adapter",
   "publishConfig": {
     "access": "public",
     "directory": "package"
