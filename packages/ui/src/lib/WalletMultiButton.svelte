@@ -17,7 +17,7 @@
   $: walletAddress = publicKey?.toBase58();
 
   
-  $: content = showAddressContent($walletStore);
+  $: content = showWalletNameOrTruncatedAddress($walletStore);
 
   const copyAddress = async () => {
     if (!walletAddress) return;
@@ -35,9 +35,11 @@
   };
   const closeModal = () => (modalVisible = false);
 
-  function showAddressContent(store) {
+  const showWalletNameOrTruncatedAddress = async (store) => {
     const walletAddress = store.publicKey?.toBase58();
-    if (!store.wallet || !walletAddress) return null;
+    if (!store.wallet || !walletAddress) {
+      return null; 
+    }
     return walletAddress.slice(0, 4) + '..' + walletAddress.slice(-4);
   }
 
