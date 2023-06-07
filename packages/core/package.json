@@ -1,16 +1,11 @@
 {
   "name": "@portal-payments/wallet-adapter-core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Svelte on Solana team",
   "repository": "https://github.com/portalpayments/svelte-on-solana-wallet-adapter",
   "license": "Apache-2.0",
   "type": "module",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src",
-    "LICENSE"
-  ],
   "publishConfig": {
     "access": "public"
   },
@@ -36,5 +31,9 @@
   "types": "dist/index.d.ts",
   "exports": {
     "import": "./dist/index.js"
-  }
+  },
+  "files": [
+    "src",
+    "dist"
+  ]
 }
