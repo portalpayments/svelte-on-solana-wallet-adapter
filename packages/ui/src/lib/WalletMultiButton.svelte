@@ -68,14 +68,14 @@
   }
 
   function clickOutside(
-    node: HTMLElement,
+    element: HTMLElement,
     callbackFunction: CallbackType,
   ): unknown {
     function onClick(event: MouseEvent) {
       if (
-        node &&
+        element &&
         event.target instanceof Node &&
-        !node.contains(event.target) &&
+        !element.contains(event.target) &&
         !event.defaultPrevented
       ) {
         callbackFunction();
