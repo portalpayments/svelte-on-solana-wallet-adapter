@@ -80,19 +80,13 @@
   cursor: not-allowed;
 }
 
-.wallet-adapter-button-end-icon,
 .wallet-adapter-button-start-icon,
-.wallet-adapter-button-end-icon img,
 .wallet-adapter-button-start-icon img {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-}
-
-.wallet-adapter-button-end-icon {
-  margin-left: 12px;
 }
 
 .wallet-adapter-button-start-icon {
@@ -284,9 +278,7 @@
   font-size: 18px;
 }
 
-.wallet-adapter-modal-list .wallet-adapter-button-end-icon,
 .wallet-adapter-modal-list .wallet-adapter-button-start-icon,
-.wallet-adapter-modal-list .wallet-adapter-button-end-icon img,
 .wallet-adapter-modal-list .wallet-adapter-button-start-icon img {
   width: 28px;
   height: 28px;
