@@ -3,10 +3,17 @@
   import WalletButton from './WalletButton.svelte';
   import WalletConnectButton from './WalletConnectButton.svelte';
   import WalletModal from './WalletModal.svelte';
-  import { walletAddressToNameAndProfilePicture } from '@portal-payments/solana-wallet-names';
+  import type { PublicKey} from "@solana/web3.js";
   import './styles.css';
 
   export let maxNumberOfWallets = 3;
+
+  export let walletAddressToNameAndProfilePicture = (publicKey: PublicKey) => {
+    return {
+      walletName: null,
+      profilePicture: null,
+    };
+  };
 
   const log = console.log 
 
@@ -16,10 +23,24 @@
     isModalVisible = false,
     hasRecentlyCopied = false;
 
-  // Was 'base58'
+  // Was previously called 'base58'
   $: walletAddress = publicKey?.toBase58();
+
+  let truncatedWalletAddress: string | null = null
+  let walletName: string | null = null
+  let profilePicture: string | null = null
   
-  $: walletNameOrTruncatedAddress = showWalletNameOrTruncatedAddress($walletStore);
+  walletStore.subscribe(async (newValue) => {
+    const walletAddress = newValue.publicKey?.toBase58();
+    if (!newValue.wallet || !walletAddress) {
+      return null; 
+    }
+    truncatedWalletAddress = truncateWalletAddress(walletAddress);
+    const walletNameAndProfilePicture = await walletAddressToNameAndProfilePicture(newValue.publicKey);
+    walletName = walletNameAndProfilePicture.walletName;
+    profilePicture = walletNameAndProfilePicture.profilePicture;    
+  });
+
 
   const copyAddress = async () => {
     if (!walletAddress) return;
@@ -42,15 +63,6 @@
   
   const closeModal = () => (isModalVisible = false);
 
-  const showWalletNameOrTruncatedAddress = (store) => {
-    
-    const walletAddress = store.publicKey?.toBase58();
-    if (!store.wallet || !walletAddress) {
-      return null; 
-    }
-    log(`>>>`, walletAddressToNameAndProfilePicture);
-    return truncateWalletAddress(walletAddress);
-  }
 
   async function connectWallet(event) {
     closeModal();
@@ -108,9 +120,14 @@
       class="wallet-adapter-button-trigger"
     >
       <svelte:fragment slot="start-icon">
-        <img src={wallet.icon} alt={`${wallet.name} icon`} />
+        {#if profilePicture}
+          <img src={profilePicture} alt={truncatedWalletAddress} />
+        {:else}
+          <!-- Show the wallet *app* icon and wallet *app* name -->
+          <img src={wallet.icon} alt={`${wallet.name} icon`} />
+        {/if}
       </svelte:fragment>
-      {walletNameOrTruncatedAddress}
+      {walletName || truncatedWalletAddress}
     </WalletButton>
     {#if isDropDrownVisible}
       <!-- TODO: fix accessability and remove the warning below -->

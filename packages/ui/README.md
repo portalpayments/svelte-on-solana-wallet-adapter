@@ -30,7 +30,9 @@ There are three components that you need to get set up:
 - `ConnectionProvider` ([`AnchorConnectionProvider`](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) if you're using Anchor)
 - `WalletMultiButton`
 
-`WalletProvider` is a component used to initialize the wallet stores and add event listeners
+#### `WalletProvider` 
+
+A component used to initialize the wallet stores and add event listeners
 
 | prop             | type        | default           |
 | ---------------- | ----------- | ----------------- |
@@ -38,11 +40,15 @@ There are three components that you need to get set up:
 | wallets          | `Wallets[]` |                   |
 | autoConnect?     | `boolean`   | `false`           |
 
-`ConnectionProvider` is a component used to establish a connection with the network.
+#### `ConnectionProvider` 
+
+A component used to establish a connection with the network.
 
 | prop    | type     | default |
 | ------- | -------- | ------- |
 | network | `string` |         |
+
+#### `AnchorConnectionProvider`
 
 Alternatively you can use `AnchorConnectionProvider` for Anchor Dapps.
 
@@ -51,11 +57,14 @@ Alternatively you can use `AnchorConnectionProvider` for Anchor Dapps.
 | network | `string` |         |
 | idl     | `Idl`    |         |
 
-`WalletMultiButton` is a component used as the entry point to connect/disconnect a wallet.
+#### `WalletMultiButton` 
 
-| prop               | type     | default |
-| ------------------ | -------- | ------- |
-| maxNumberOfWallets | `number` | `3`     |
+A component used as the entry point to connect/disconnect a wallet app.
+
+| prop                                  | type       | default |
+| ------------------------------------- | -----------| ------- |
+| maxNumberOfWallets                    | `number`   | `3`     |
+| walletAddressToNameAndProfilePicture  | `Function` | See TS  |
 
 ## SvelteKit
 
