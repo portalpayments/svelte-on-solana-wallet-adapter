@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 :root {
-   
   /* 
   --text-color: white;
   --background-color: #512da8;
@@ -17,7 +16,6 @@
   --modal-background-color: #10141f;
   --shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
    */
-  
 
   --text-color: #222;
   --background-color: transparent;
@@ -31,9 +29,9 @@
   --fonts: "Inter";
   --height: 48px;
   --border: 0.5px solid #999;
-  --border-radius: calc(var(--height) / 2); 
+  --border-radius: calc(var(--height) / 2);
   --modal-background-color: white;
-  --shadow: 0 2px 4px rgba(0,0,0,.3);
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .wallet-adapter-button {
@@ -46,8 +44,8 @@
   font-family: var(--fonts);
   font-size: 16px;
   font-weight: 600;
-  height: var(--height);;
-  line-height: var(--height);;
+  height: var(--height);
+  line-height: var(--height);
   padding: 0 24px;
   border-radius: var(--border-radius);
 

@@ -3,15 +3,18 @@
   import WalletButton from './WalletButton.svelte';
   import WalletConnectButton from './WalletConnectButton.svelte';
   import WalletModal from './WalletModal.svelte';
+  import { walletAddressToNameAndProfilePicture } from '@portal-payments/solana-wallet-names';
   import './styles.css';
 
   export let maxNumberOfWallets = 3;
 
+  const log = console.log 
+
   $: ({ publicKey, wallet, disconnect, connect, select } = $walletStore);
 
-  let dropDrownVisible = false,
-    modalVisible = false,
-    copied = false;
+  let isDropDrownVisible = false,
+    isModalVisible = false,
+    hasRecentlyCopied = false;
 
   // Was 'base58'
   $: walletAddress = publicKey?.toBase58();
@@ -21,25 +24,32 @@
   const copyAddress = async () => {
     if (!walletAddress) return;
     await navigator.clipboard.writeText(walletAddress);
-    copied = true;
-    setTimeout(() => (copied = false), 400);
+    hasRecentlyCopied = true;
+    setTimeout(() => (hasRecentlyCopied = false), 400);
   };
 
-  const openDropdown = () => (dropDrownVisible = true);
-  const closeDropdown = () => (dropDrownVisible = false);
+  const openDropdown = () => (isDropDrownVisible = true);
+  const closeDropdown = () => (isDropDrownVisible = false);
+
+  const truncateWalletAddress = (walletAddress: string ) => {
+    return walletAddress.slice(0, 4) + '..' + walletAddress.slice(-4);
+  }
 
   const openModal = () => {
-    modalVisible = true;
+    isModalVisible = true;
     closeDropdown();
   };
-  const closeModal = () => (modalVisible = false);
+  
+  const closeModal = () => (isModalVisible = false);
 
   const showWalletNameOrTruncatedAddress = (store) => {
+    
     const walletAddress = store.publicKey?.toBase58();
     if (!store.wallet || !walletAddress) {
       return null; 
     }
-    return walletAddress.slice(0, 4) + '..' + walletAddress.slice(-4);
+    log(`>>>`, walletAddressToNameAndProfilePicture);
+    return truncateWalletAddress(walletAddress);
   }
 
   async function connectWallet(event) {
@@ -102,7 +112,7 @@
       </svelte:fragment>
       {walletNameOrTruncatedAddress}
     </WalletButton>
-    {#if dropDrownVisible}
+    {#if isDropDrownVisible}
       <!-- TODO: fix accessability and remove the warning below -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <ul
@@ -110,7 +120,7 @@
         class="wallet-adapter-dropdown-list wallet-adapter-dropdown-list-active"
         role="menu"
         use:clickOutside={() => {
-          if (dropDrownVisible) {
+          if (isDropDrownVisible) {
             closeDropdown();
           }
         }}
@@ -120,7 +130,7 @@
           class="wallet-adapter-dropdown-list-item"
           role="menuitem"
         >
-          {copied ? 'Copied' : 'Copy address'}
+          {hasRecentlyCopied ? 'Copied' : 'Copy address'}
         </li>
         <li
           on:click={openModal}
@@ -141,7 +151,7 @@
   </div>
 {/if}
 
-{#if modalVisible}
+{#if isModalVisible}
   <WalletModal
     on:close={closeModal}
     on:connect={connectWallet}

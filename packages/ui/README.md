@@ -109,12 +109,7 @@ And then in the **\_\_layout.svelte** component you can import the wallets and s
 <script lang="ts">
   import { onMount } from "svelte";
   import { clusterApiUrl } from "@solana/web3.js";
-  import {
-    workSpace,
-    WalletProvider,
-    WalletMultiButton,
-    ConnectionProvider,
-  } from "@portal-payments/wallet-adapter-ui";
+  import { workSpace, WalletProvider, WalletMultiButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
 
   const localStorageKey = "walletAdapter";
   const network = clusterApiUrl("devnet"); // localhost or mainnet
@@ -204,12 +199,7 @@ export default {
 ```html
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import {
-    workSpace,
-    WalletProvider,
-    WalletMultiButton,
-    ConnectionProvider,
-  } from "@portal-payments/wallet-adapter-ui";
+  import { workSpace, WalletProvider, WalletMultiButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
   import { clusterApiUrl } from "@solana/web3.js";
   import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
 
