@@ -80,12 +80,21 @@
   cursor: not-allowed;
 }
 
+.wallet-adapter-button-start-icon img.profile-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
 .wallet-adapter-button-start-icon img.wallet-adapter-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
-  height: 24px;
+  aspect-ratio: 1;
 }
 
 .wallet-adapter-button-start-icon {
