@@ -15,6 +15,7 @@
   --border: none;
   --border-radius: "4px";
   --modal-background-color: #10141f;
+  --shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
    */
   
 
@@ -25,12 +26,14 @@
   --disabled-background-color: transparent;
 
   --hover-background-color: transparent;
-  --hover-text-color: white;
+  --hover-text-color: black;
+
   --fonts: "Inter";
   --height: 48px;
   --border: 0.5px solid #999;
   --border-radius: calc(var(--height) / 2); 
   --modal-background-color: white;
+  --shadow: 0 2px 4px rgba(0,0,0,.3);
 }
 
 .wallet-adapter-button {
@@ -110,7 +113,7 @@
   margin: 0;
   list-style: none;
   border-radius: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
@@ -234,7 +237,7 @@
   max-width: 400px;
   border-radius: 10px;
   background: var(--modal-background-color);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow);
   font-family: var(--fonts);
   flex: 1;
 }
