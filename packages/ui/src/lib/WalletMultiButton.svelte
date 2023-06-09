@@ -8,7 +8,7 @@
 
   export let maxNumberOfWallets = 3;
 
-  export let walletAddressToNameAndProfilePicture = (publicKey: PublicKey) => {
+  export let walletAddressToNameAndProfilePicture = async (publicKey: PublicKey) => {
     return {
       walletName: null,
       profilePicture: null,
