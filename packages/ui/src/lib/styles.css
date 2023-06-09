@@ -80,7 +80,6 @@
   cursor: not-allowed;
 }
 
-.wallet-adapter-button-start-icon,
 .wallet-adapter-button-start-icon img.wallet-adapter-icon {
   display: flex;
   align-items: center;
@@ -278,7 +277,6 @@
   font-size: 18px;
 }
 
-.wallet-adapter-modal-list .wallet-adapter-button-start-icon,
 .wallet-adapter-modal-list .wallet-adapter-button-start-icon img.wallet-adapter-icon {
   width: 28px;
   height: 28px;
