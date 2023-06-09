@@ -81,7 +81,7 @@
 }
 
 .wallet-adapter-button-start-icon,
-.wallet-adapter-button-start-icon img {
+.wallet-adapter-button-start-icon img.wallet-adapter-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,7 +279,7 @@
 }
 
 .wallet-adapter-modal-list .wallet-adapter-button-start-icon,
-.wallet-adapter-modal-list .wallet-adapter-button-start-icon img {
+.wallet-adapter-modal-list .wallet-adapter-button-start-icon img.wallet-adapter-icon {
   width: 28px;
   height: 28px;
 }

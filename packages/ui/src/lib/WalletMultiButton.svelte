@@ -121,10 +121,10 @@
     >
       <svelte:fragment slot="start-icon">
         {#if profilePicture}
-          <img src={profilePicture} alt={truncatedWalletAddress} />
+          <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
         {:else}
           <!-- Show the wallet *app* icon and wallet *app* name -->
-          <img src={wallet.icon} alt={`${wallet.name} icon`} />
+          <img class="wallet-adapter-icon" src={wallet.icon} alt={`${wallet.name} icon`} />
         {/if}
       </svelte:fragment>
       {walletName || truncatedWalletAddress}
