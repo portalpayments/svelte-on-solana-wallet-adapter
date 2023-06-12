@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { walletStore } from '@portal-payments/wallet-adapter-core';
-	import WalletButton from './WalletButton.svelte';
+	import ChooseWalletAdapterButton from './ChooseWalletAdapterButton.svelte';
 
 	export let disabled: boolean = false;
 
@@ -20,7 +20,7 @@
 	}
 </script>
 
-<WalletButton
+<ChooseWalletAdapterButton
 	on:click={handleClick}
 	disabled={disabled || !wallet || connecting || connected}
 	class="wallet-adapter-button-trigger"
@@ -31,4 +31,4 @@
 		{/if}
 	</svelte:fragment>
 	{content}
-</WalletButton>
+</ChooseWalletAdapterButton>

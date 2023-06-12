@@ -1,6 +1,6 @@
 <script lang="ts">
   import { walletStore } from '@portal-payments/wallet-adapter-core';
-  import WalletButton from './WalletButton.svelte';
+  import ChooseWalletAdapterButton from './ChooseWalletAdapterButton.svelte';
   import WalletConnectButton from './WalletConnectButton.svelte';
   import WalletModal from './WalletModal.svelte';
   import type { PublicKey} from "@solana/web3.js";
@@ -108,14 +108,14 @@
 </script>
 
 {#if !wallet}
-  <WalletButton class="wallet-adapter-button-trigger" on:click={openModal}>
+  <ChooseWalletAdapterButton class="wallet-adapter-button-trigger" on:click={openModal}>
     <slot>Select Wallet</slot>
-  </WalletButton>
+  </ChooseWalletAdapterButton>
 {:else if !walletAddress}
   <WalletConnectButton />
 {:else}
   <div class="wallet-adapter-dropdown">
-    <WalletButton
+    <ChooseWalletAdapterButton
       on:click={openDropdown}
       class="wallet-adapter-button-trigger"
     >
@@ -128,7 +128,7 @@
         {/if}
       </svelte:fragment>
       {walletName || truncatedWalletAddress}
-    </WalletButton>
+    </ChooseWalletAdapterButton>
     {#if isDropDrownVisible}
       <!-- TODO: fix accessability and remove the warning below -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->

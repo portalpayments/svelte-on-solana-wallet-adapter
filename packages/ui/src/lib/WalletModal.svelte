@@ -2,7 +2,7 @@
   import { slide } from 'svelte/transition';
   import { walletStore } from '@portal-payments/wallet-adapter-core';
   import { createEventDispatcher } from 'svelte';
-  import WalletButton from './WalletButton.svelte';
+  import ChooseWalletAdapterButton from './ChooseWalletAdapterButton.svelte';
   import type { WalletName } from '@solana/wallet-adapter-base';
 
   export let maxNumberOfWallets;
@@ -93,7 +93,7 @@
         <ul class="wallet-adapter-modal-list">
           {#each $walletStore.wallets.slice(0, numberOfWalletsShown) as { adapter: { name, icon, url }, readyState }}
             <li>
-              <WalletButton
+              <ChooseWalletAdapterButton
                 on:click={() => connect(name)}
               >
                 {name}
@@ -107,7 +107,7 @@
                     ? 'Detected'
                     : ''}
                 </svelte:fragment>
-              </WalletButton>
+              </ChooseWalletAdapterButton>
             </li>
           {/each}
         </ul>
@@ -277,7 +277,7 @@
           >
             {#each $walletStore.wallets.slice(0, numberOfWalletsShown) as { adapter: { name, icon, url }, readyState }}
               <li>
-                <WalletButton
+                <ChooseWalletAdapterButton
                   on:click={() =>
                     connect(name)}
                 >
@@ -292,7 +292,7 @@
                       ? 'Detected'
                       : ''}
                   </svelte:fragment>
-                </WalletButton>
+                </ChooseWalletAdapterButton>
               </li>
             {/each}
           </ul>
