@@ -39,6 +39,8 @@ export interface WalletStore {
   onError: ErrorHandler;
   publicKey: PublicKey | null;
   ready: WalletReadyState;
+  // TODO: dupe of 'adapter'
+  // TODO: Should be called WalletAdapter
   wallet: Adapter | null;
   walletsByName: Record<WalletName, Adapter>;
   name: WalletName | null;
