@@ -61,6 +61,7 @@
 
 <svelte:window on:keyup={handleKeyup} />
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   aria-labelledby="wallet-adapter-modal-title"
   aria-modal="true"
