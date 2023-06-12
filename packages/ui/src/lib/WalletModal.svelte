@@ -35,14 +35,14 @@
     showExtensionsAvailables = !showExtensionsAvailables;
   }
 
-  function closeModal(e) {
-    if (e.target === backdrop || e.target === container) {
+  function closeModal(event) {
+    if (event.target === backdrop || event.target === container) {
       dispatch('close');
     }
   }
 
-  function handleKeyup(e) {
-    if (e.key == 'Escape') {
+  function handleKeyup(event) {
+    if (event.key == 'Escape') {
       dispatch('close');
     }
   }
@@ -67,7 +67,7 @@
   class="wallet-adapter-modal wallet-adapter-modal-fade-in"
   role="dialog"
   bind:this={backdrop}
-  on:click={e => closeModal(e)}
+  on:click={event => closeModal(event)}
 >
   <div class="wallet-adapter-modal-container" bind:this={container}>
     <div class="wallet-adapter-modal-wrapper">
