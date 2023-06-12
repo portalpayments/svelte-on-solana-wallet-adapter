@@ -99,7 +99,7 @@
                 {name}
 
                 <svelte:fragment slot="start-icon">
-                  <img src={icon} alt={`${name} icon`} />
+                  <img class='wallet-adapter-icon' src={icon} alt={`${name} icon`} />
                 </svelte:fragment>
 
                 <svelte:fragment slot="status">
