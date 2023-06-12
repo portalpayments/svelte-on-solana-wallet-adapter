@@ -12,6 +12,7 @@
     backdrop: HTMLDivElement,
     container: HTMLDivElement;
 
+  let numberOfWalletsShown: number
   $: numberOfWalletsShown = showMoreOptions
     ? $walletStore.wallets.length
     : maxNumberOfWallets;
