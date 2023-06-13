@@ -14,6 +14,9 @@
 </svg>
 
 <style>
+  svg {
+    padding: 6px;
+  }
   .wallet-adapter-modal-list-more-icon-rotate {
     transform: rotate(180deg);
   }

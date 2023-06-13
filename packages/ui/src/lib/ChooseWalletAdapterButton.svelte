@@ -12,7 +12,19 @@
     </i>
   {/if}
   <slot />
-  <span>
+  <span class="adapter-install-status">
     <slot name="status" />
   </span>
 </button>
+
+<style>
+  .adapter-install-status {
+    margin-left: auto;
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  button {
+    width: 100%;
+  }
+</style>
