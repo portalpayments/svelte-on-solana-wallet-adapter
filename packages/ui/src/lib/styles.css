@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 :root {
   --text-color: #222;
-  --background-color: transparent;
+  --background-color: white;
 
   --disabled-text-color: #999;
   --disabled-background-color: transparent;
@@ -17,12 +17,11 @@
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-// This is any button in the wallet adapter, including the 'Connect a wallet on Solana to continue' buttons
-// The styling should basically be pretty boring
+/* This is any button in the wallet adapter, including the 'Connect a wallet on Solana to continue' buttons
+The styling should basically be pretty boring */
 .wallet-adapter-button {
   color: var(--text-color);
   background-color: transparent; 
-  border: var(--border);
   cursor: pointer;
   display: flex;
   align-items: center;
