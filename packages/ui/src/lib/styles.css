@@ -293,9 +293,7 @@ The styling should be very boring and minimal */
   font-size: 16px;
 }
 
-.wallet-adapter-modal-list-more-icon-rotate {
-  transform: rotate(180deg);
-}
+
 
 .wallet-adapter-modal-middle {
   width: 100%;
