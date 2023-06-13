@@ -20,6 +20,8 @@
     };
   };
 
+  export let hideWalletAddressIfUserHasName = true;
+
   // Was called CallbackType but TS doesn't use Hungarian notation.
   // and this isn't used to control flow.
   interface ClickHandler {
@@ -184,13 +186,15 @@ TODO: fix wallet-adapter-core -->
             {hasRecentlyCopiedWalletName ? 'Copied' : 'Copy wallet name'}
           </li>
         {/if}
-        <li
-          on:click={copyWalletAddress}
-          class="wallet-adapter-dropdown-list-item"
-          role="menuitem"
-        >
-          {hasRecentlyCopiedWalletAddress ? 'Copied' : 'Copy address'}
-        </li>
+        {#if ! walletName && ! hideWalletAddressIfUserHasName }
+          <li
+            on:click={copyWalletAddress}
+            class="wallet-adapter-dropdown-list-item"
+            role="menuitem"
+          >
+            {hasRecentlyCopiedWalletAddress ? 'Copied' : 'Copy wallet address'}
+          </li>
+        {/if}
         <li
           on:click={openModal}
           class="wallet-adapter-dropdown-list-item"
