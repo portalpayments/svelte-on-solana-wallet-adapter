@@ -212,21 +212,6 @@ The styling should be very boring and minimal */
   right: 0;
 }
 
-.wallet-adapter-modal-container {
-  display: flex;
-  margin: 3rem;
-  min-height: calc(100vh - 6rem); /* 100vh - 2 * margin */
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 480px) {
-  .wallet-adapter-modal-container {
-    margin: 1rem;
-    min-height: calc(100vh - 2rem); /* 100vh - 2 * margin */
-  }
-}
-
 .wallet-adapter-modal-wrapper {
   box-sizing: border-box;
   position: relative;
