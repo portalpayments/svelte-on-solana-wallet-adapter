@@ -82,10 +82,43 @@
 
     {#if installedWalletAdaptersWithReadyState.length}
       <h1 class="wallet-adapter-modal-title">Connect a wallet on Solana to continue</h1>
-      <!-- TODO: rename to something like installed-wallet-adapters -->
-      <ul class="wallet-adapter-modal-list">
+      <div class="wallet-adapters">
         {#each installedWalletAdaptersWithReadyState as walletAdapterWithReadyState}
-          <li>
+          <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+            {walletAdapterWithReadyState.adapter.name}
+
+            <svelte:fragment slot="icon">
+              <img
+                class="wallet-adapter-icon"
+                src={walletAdapterWithReadyState.adapter.icon}
+                alt={`${walletAdapterWithReadyState.adapter.name} icon`}
+              />
+            </svelte:fragment>
+
+            <svelte:fragment slot="bonus-text">
+              {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+            </svelte:fragment>
+          </Button>
+        {/each}
+      </div>
+      {#if uninstalledWalletAdaptersWithReadyState.length}
+        <button
+          class="wallet-adapters-more"
+          style="justify-content: space-between;"
+          class:wallet-adapter-modal-collapse-button-active={isShowingUninstalledWallets}
+          on:click={() => toggleShowingUninstalledWallets()}
+        >
+          <span>
+            {isShowingUninstalledWallets ? "Less" : "More"} options
+          </span>
+
+          <RotatingArrow isRotated={isShowingUninstalledWallets} />
+        </button>
+      {/if}
+
+      {#if isShowingUninstalledWallets}
+        <div class="wallet-adapters" transition:slide={{ duration: 300 }}>
+          {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
             <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
               {walletAdapterWithReadyState.adapter.name}
 
@@ -101,46 +134,8 @@
                 {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
               </svelte:fragment>
             </Button>
-          </li>
-        {/each}
-      </ul>
-      {#if uninstalledWalletAdaptersWithReadyState.length}
-        <button
-          class="wallet-adapter-modal-list-more"
-          style="justify-content: space-between;"
-          class:wallet-adapter-modal-collapse-button-active={isShowingUninstalledWallets}
-          on:click={() => toggleShowingUninstalledWallets()}
-        >
-          <span>
-            {isShowingUninstalledWallets ? "Less" : "More"} options
-          </span>
-
-          <RotatingArrow isRotated={isShowingUninstalledWallets} />
-        </button>
-      {/if}
-
-      {#if isShowingUninstalledWallets}
-        <ul class="wallet-adapter-modal-list" transition:slide={{ duration: 300 }}>
-          {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
-            <li>
-              <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
-                {walletAdapterWithReadyState.adapter.name}
-
-                <svelte:fragment slot="icon">
-                  <img
-                    class="wallet-adapter-icon"
-                    src={walletAdapterWithReadyState.adapter.icon}
-                    alt={`${walletAdapterWithReadyState.adapter.name} icon`}
-                  />
-                </svelte:fragment>
-
-                <svelte:fragment slot="bonus-text">
-                  {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
-                </svelte:fragment>
-              </Button>
-            </li>
           {/each}
-        </ul>
+        </div>
       {/if}
     {:else}
       <!-- TODO: maybe rename -no-wallet-get-started or similar? -->
@@ -246,14 +241,14 @@
     }
   }
 
-  .wallet-adapter-modal-list {
+  .wallet-adapters {
     margin: 0 0 12px 0;
     padding: 0;
     width: 100%;
     list-style: none;
   }
 
-  .wallet-adapter-modal-list-more {
+  .wallet-adapters-more {
     cursor: pointer;
     border: none;
     padding: 12px 24px 24px 12px;
@@ -265,7 +260,7 @@
     font-family: var(--fonts);
   }
 
-  .wallet-adapter-modal-list-more span {
+  .wallet-adapters-more span {
     font-size: 16px;
   }
 
@@ -297,14 +292,14 @@
     }
   }
 
-  .wallet-adapter-modal-list {
+  .wallet-adapters {
     margin: 0 0 12px 0;
     padding: 0;
     width: 100%;
     list-style: none;
   }
 
-  .wallet-adapter-modal-list-more {
+  .wallet-adapters-more {
     cursor: pointer;
     border: none;
     padding: 12px 24px 24px 12px;
@@ -316,7 +311,7 @@
     font-family: var(--fonts);
   }
 
-  .wallet-adapter-modal-list-more span {
+  .wallet-adapters-more span {
     font-size: 16px;
   }
 
