@@ -78,6 +78,8 @@ The styling should be very boring and minimal */
     /* The icon, the name, then show the bonus text all the way to the right */
     grid-template-columns: auto auto 1fr;
     grid-auto-flow: column;
+    align-content: center;
+    gap: 4px;
   }
 
   button :global(.profile-picture) {

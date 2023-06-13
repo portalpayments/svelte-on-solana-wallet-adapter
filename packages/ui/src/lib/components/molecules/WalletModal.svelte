@@ -60,6 +60,7 @@
       connect(torusWallet.adapter.name);
     } else {
       // TODO: close the modal if people don't have a wallet? Shouldn't we open solana.com or something?
+      window.open("https://solana.com/ecosystem/explore?categories=wallet");
       dispatch("close");
     }
   };
@@ -144,12 +145,10 @@
     {:else}
       <!-- TODO: maybe rename -no-wallet-get-started or similar? -->
       <h1 class="wallet-adapter-modal-title">You'll need a wallet on Solana to continue</h1>
-      <div class="wallet-adapter-modal-middle">
-        <button type="button" class="wallet-adapter-modal-middle-button" on:click={getStarted}>
-          <GenericWalletPicture />
-          <p>Get started</p>
-        </button>
-      </div>
+      <button class="install-a-wallet" on:click={getStarted}>
+        <GenericWalletPicture />
+        <p>Get started</p>
+      </button>
     {/if}
   </div>
 </div>
@@ -268,28 +267,6 @@
     font-size: 16px;
   }
 
-  .wallet-adapter-modal-middle {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 24px 24px 24px;
-    box-sizing: border-box;
-  }
-
-  .wallet-adapter-modal-middle-button {
-    display: block;
-    cursor: pointer;
-    margin-top: 48px;
-    width: 100%;
-    background-color: var(--background-color);
-    padding: 12px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    color: var(--text-color);
-  }
-
   @media (max-width: 374px) {
     .wallet-adapter-modal-title {
       font-size: 18px;
@@ -319,21 +296,11 @@
     font-size: 16px;
   }
 
-  .wallet-adapter-modal-middle {
-    width: 100%;
+  .install-a-wallet {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 24px 24px 24px;
-    box-sizing: border-box;
-  }
-
-  .wallet-adapter-modal-middle-button {
-    display: block;
+    justify-content: center;
     cursor: pointer;
-    margin-top: 48px;
     width: 100%;
-    background-color: var(--background-color);
     padding: 12px;
     font-size: 18px;
     border: none;
