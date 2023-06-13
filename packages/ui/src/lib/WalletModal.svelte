@@ -78,15 +78,10 @@
   on:click={(event) => closeModal(event)}
 >
   <div class="wallet-adapter-modal-content">
-    <h1 class="wallet-adapter-modal-title">
-      {installedWalletAdaptersWithReadyState.length
-        ? "Connect a wallet on Solana to continue"
-        : `You'll need a wallet on Solana to continue`}
-    </h1>
-
     <CloseButton clickHandler={() => dispatch("close")} />
 
     {#if installedWalletAdaptersWithReadyState.length}
+      <h1 class="wallet-adapter-modal-title">Connect a wallet on Solana to continue</h1>
       <!-- TODO: rename to something like installed-wallet-adapters -->
       <ul class="wallet-adapter-modal-list">
         {#each installedWalletAdaptersWithReadyState as walletAdapterWithReadyState}
@@ -123,36 +118,39 @@
           <RotatingArrow isRotated={isShowingUninstalledWallets} />
         </button>
       {/if}
+
+      {#if isShowingUninstalledWallets}
+        <ul class="wallet-adapter-modal-list" transition:slide={{ duration: 300 }}>
+          {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
+            <li>
+              <ChooseWalletAdapterButton on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+                {walletAdapterWithReadyState.adapter.name}
+
+                <svelte:fragment slot="start-icon">
+                  <img
+                    class="wallet-adapter-icon"
+                    src={walletAdapterWithReadyState.adapter.icon}
+                    alt={`${walletAdapterWithReadyState.adapter.name} icon`}
+                  />
+                </svelte:fragment>
+
+                <svelte:fragment slot="status">
+                  {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+                </svelte:fragment>
+              </ChooseWalletAdapterButton>
+            </li>
+          {/each}
+        </ul>
+      {/if}
     {:else}
+      <!-- TODO: maybe rename -no-wallet-get-started or similar? -->
+      <h1 class="wallet-adapter-modal-title">You'll need a wallet on Solana to continue</h1>
       <div class="wallet-adapter-modal-middle">
-        <GenericWalletPicture />
-        <p>You'll need a Solana wallet.</p>
-        <button type="button" class="wallet-adapter-modal-middle-button" on:click={getStarted}>Get started</button>
+        <button type="button" class="wallet-adapter-modal-middle-button" on:click={getStarted}>
+          <GenericWalletPicture />
+          <p>Get started</p>
+        </button>
       </div>
-    {/if}
-
-    {#if uninstalledWalletAdaptersWithReadyState.length}
-      <ul class="wallet-adapter-modal-list" transition:slide={{ duration: 300 }}>
-        {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
-          <li>
-            <ChooseWalletAdapterButton on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
-              {walletAdapterWithReadyState.adapter.name}
-
-              <svelte:fragment slot="start-icon">
-                <img
-                  class="wallet-adapter-icon"
-                  src={walletAdapterWithReadyState.adapter.icon}
-                  alt={`${walletAdapterWithReadyState.adapter.name} icon`}
-                />
-              </svelte:fragment>
-
-              <svelte:fragment slot="status">
-                {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
-              </svelte:fragment>
-            </ChooseWalletAdapterButton>
-          </li>
-        {/each}
-      </ul>
     {/if}
   </div>
 </div>
