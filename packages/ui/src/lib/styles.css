@@ -1,22 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 :root {
-  /* 
-  --text-color: white;
-  --background-color: #512da8;
-  
-  --disabled-text-color: #999;
-  --disabled-background-color: #404144;
-
-  --hover-background-color: #1a1f2e;
-  --hover-text-color: white;
-  --fonts: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; 
-  --height: 48px;
-  --border: none;
-  --border-radius: "4px";
-  --modal-background-color: #10141f;
-  --shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-   */
-
   --text-color: #222;
   --background-color: transparent;
 
