@@ -100,7 +100,7 @@ The styling should basically be pretty boring */
 
 .wallet-adapter-dropdown-list {
   color: var(--text-color);
-  background-color: transparent;
+  background-color: var(--background-color);
   position: absolute;
   z-index: 99;
   display: grid;
