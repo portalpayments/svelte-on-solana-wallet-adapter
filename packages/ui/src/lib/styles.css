@@ -212,7 +212,7 @@ The styling should be very boring and minimal */
   right: 0;
 }
 
-.wallet-adapter-modal-wrapper {
+.wallet-adapter-modal-content {
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -227,7 +227,7 @@ The styling should be very boring and minimal */
   flex: 1;
 }
 
-.wallet-adapter-modal-wrapper .wallet-adapter-button {
+.wallet-adapter-modal-content .wallet-adapter-button {
   width: 100%;
 }
 

@@ -67,15 +67,14 @@
 <!-- TODO: fix name. It's effectively the shade for the modal -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
+  class="wallet-adapter-modal wallet-adapter-modal-fade-in"
   aria-labelledby="wallet-adapter-modal-title"
   aria-modal="true"
-  class="wallet-adapter-modal wallet-adapter-modal-fade-in"
   role="dialog"
   bind:this={backdrop}
   on:click={(event) => closeModal(event)}
 >
-  <!-- TODO: fix name. It's the content for the modal -->
-  <div class="wallet-adapter-modal-wrapper">
+  <div class="wallet-adapter-modal-content">
     <h1 class="wallet-adapter-modal-title">
       {installedWalletAdapterCount
         ? "Connect a wallet on Solana to continue"
