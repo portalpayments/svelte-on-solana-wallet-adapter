@@ -18,10 +18,11 @@
 }
 
 /* This is any button in the wallet adapter, including the 'Connect a wallet on Solana to continue' buttons
-The styling should basically be pretty boring */
+The styling should be very boring and minimal */
 .wallet-adapter-button {
   color: var(--text-color);
   background-color: transparent; 
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
