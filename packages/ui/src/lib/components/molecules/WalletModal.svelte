@@ -96,7 +96,9 @@
             </svelte:fragment>
 
             <svelte:fragment slot="bonus-text">
-              {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+              <div class="bonus-text">
+                {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+              </div>
             </svelte:fragment>
           </Button>
         {/each}
@@ -131,7 +133,9 @@
               </svelte:fragment>
 
               <svelte:fragment slot="bonus-text">
-                {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+                <div class="bonus-text">
+                  {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
+                </div>
               </svelte:fragment>
             </Button>
           {/each}

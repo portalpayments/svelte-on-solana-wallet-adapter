@@ -74,6 +74,10 @@ The styling should be very boring and minimal */
 
   button.option {
     width: 100%;
+    display: grid;
+    /* The icon, the name, then show the bonus text all the way to the right */
+    grid-template-columns: auto auto 1fr;
+    grid-auto-flow: column;
   }
 
   button :global(.profile-picture) {
@@ -93,7 +97,7 @@ The styling should be very boring and minimal */
     aspect-ratio: 1;
   }
 
-  .bonus-text {
+  button :global(.bonus-text) {
     margin-left: auto;
     font-size: 14px;
     opacity: 0.6;
