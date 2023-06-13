@@ -19,15 +19,9 @@
 
   // Show installed wallet adapters first.
   // 'wallet-adapter-core' incorrectly uses 'Wallet' but this is a combination of a wallet adapter and a ready state.
-  $: availableWalletAdaptersWithReadyState = $walletStore.wallets.slice(0, numberOfWalletsShown).sort((a, b) => {
-    if (a.readyState === 'Installed' && b.readyState !== 'Installed') {
-      return 1;
-    }
-    if (a.readyState !== 'Installed' && b.readyState === 'Installed') {
-      return -1;
-    }
-    return 0;
-  })
+  $: availableWalletAdaptersWithReadyState = $walletStore.wallets
+    .slice(0, numberOfWalletsShown)
+    .sort(byInstalledStatus);
 
   // Was walletsAvailable
   $: installedWalletAdapterCount = $walletStore.wallets.filter(
