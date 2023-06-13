@@ -17,7 +17,20 @@
     ? $walletStore.wallets.length
     : maxNumberOfWallets;
 
-  $: walletsAvailable = $walletStore.wallets.filter(
+  // Show installed wallet adapters first.
+  // 'wallet-adapter-core' incorrectly uses 'Wallet' but this is a combination of a wallet adapter and a ready state.
+  $: availableWalletAdaptersWithReadyState = $walletStore.wallets.slice(0, numberOfWalletsShown).sort((a, b) => {
+    if (a.readyState === 'Installed' && b.readyState !== 'Installed') {
+      return 1;
+    }
+    if (a.readyState !== 'Installed' && b.readyState === 'Installed') {
+      return -1;
+    }
+    return 0;
+  })
+
+  // Was walletsAvailable
+  $: installedWalletAdapterCount = $walletStore.wallets.filter(
     wallet => wallet.readyState === 'Installed',
   ).length;
 
@@ -73,7 +86,7 @@
   <div class="wallet-adapter-modal-container" bind:this={container}>
     <div class="wallet-adapter-modal-wrapper">
       <h1 class="wallet-adapter-modal-title">
-        {walletsAvailable
+        {installedWalletAdapterCount
           ? 'Connect a wallet on Solana to continue'
           : `You'll need a wallet on Solana to continue`}
       </h1>
@@ -89,21 +102,21 @@
         </svg>
       </button>
 
-      {#if walletsAvailable}
+      {#if installedWalletAdapterCount}
         <ul class="wallet-adapter-modal-list">
-          {#each $walletStore.wallets.slice(0, numberOfWalletsShown) as { adapter: { name, icon, url }, readyState }}
+          {#each availableWalletAdaptersWithReadyState as walletAdapterWithReadyState}
             <li>
               <ChooseWalletAdapterButton
-                on:click={() => connect(name)}
+                on:click={() => connect(walletAdapterWithReadyState.adapter.name)}
               >
-                {name}
+                {walletAdapterWithReadyState.adapter.name}
 
                 <svelte:fragment slot="start-icon">
-                  <img class='wallet-adapter-icon' src={icon} alt={`${name} icon`} />
+                  <img class='wallet-adapter-icon' src={walletAdapterWithReadyState.adapter.icon} alt={`${walletAdapterWithReadyState.adapter.name} icon`} />
                 </svelte:fragment>
 
                 <svelte:fragment slot="status">
-                  {readyState === 'Installed'
+                  {walletAdapterWithReadyState.readyState === 'Installed'
                     ? 'Detected'
                     : ''}
                 </svelte:fragment>

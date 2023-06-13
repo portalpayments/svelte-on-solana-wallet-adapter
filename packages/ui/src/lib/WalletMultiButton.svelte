@@ -11,6 +11,8 @@
 
   export let maxNumberOfWallets = 3;
 
+  // A stub function if the user isn't providing their own mechanism
+  // for mapping wallet addresses to wallet names and profile pictures.
   export let walletAddressToNameAndProfilePicture = async (publicKey: PublicKey) => {
     return {
       walletName: null,
