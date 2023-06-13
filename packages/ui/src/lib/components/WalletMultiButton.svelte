@@ -1,15 +1,13 @@
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import ChooseWalletAdapterButton from "./ChooseWalletAdapterButton.svelte";
-  import WalletConnectButton from "./WalletConnectButton.svelte";
-  import WalletModal from "./WalletModal.svelte";
-  import { copyToClipboard, truncateWalletAddress, sleep } from "./utils";
+  import Button from "./atoms/Button.svelte";
+  import WalletConnectButton from "./molecules/WalletConnectButton.svelte";
+  import WalletModal from "./molecules/WalletModal.svelte";
+  import { copyToClipboard, truncateWalletAddress, sleep } from "../utils";
   import type { PublicKey } from "@solana/web3.js";
   import "./styles.css";
 
   const log = console.log;
-
-  export let maxNumberOfWallets = 3;
 
   // A stub function if the user isn't providing their own mechanism
   // for mapping wallet addresses to wallet names and profile pictures.
@@ -132,15 +130,15 @@
 <!-- Really 'wallet' means 'walletAdapter'
 TODO: fix wallet-adapter-core -->
 {#if !wallet}
-  <ChooseWalletAdapterButton class="wallet-adapter-button-trigger" on:click={openModal}>
+  <Button buttonVersion="capsule" on:click={openModal}>
     <slot>Select Wallet</slot>
-  </ChooseWalletAdapterButton>
+  </Button>
 {:else if !walletAddress}
   <WalletConnectButton />
 {:else}
   <div class="wallet-adapter-dropdown">
-    <ChooseWalletAdapterButton on:click={openDropdown} class="wallet-adapter-button-trigger">
-      <svelte:fragment slot="start-icon">
+    <Button buttonVersion="capsule" on:click={openDropdown}>
+      <svelte:fragment slot="icon">
         {#if profilePicture}
           <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
         {:else}
@@ -149,7 +147,7 @@ TODO: fix wallet-adapter-core -->
         {/if}
       </svelte:fragment>
       {walletName || truncatedWalletAddress}
-    </ChooseWalletAdapterButton>
+    </Button>
     {#if isDropDrownVisible}
       <!-- TODO: fix accessability and remove the warning below -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -183,5 +181,62 @@ TODO: fix wallet-adapter-core -->
 {/if}
 
 {#if isModalVisible}
-  <WalletModal on:close={closeModal} on:connect={connectWalletAdapter} {maxNumberOfWallets} />
+  <WalletModal on:close={closeModal} on:connect={connectWalletAdapter} />
 {/if}
+
+<style>
+  .wallet-adapter-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .wallet-adapter-dropdown-list {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    position: absolute;
+    z-index: 99;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 10px;
+    padding: 10px;
+    top: 100%;
+    right: 0;
+    margin: 0;
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
+    font-family: var(--fonts);
+  }
+
+  .wallet-adapter-dropdown-list-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(10px);
+  }
+
+  .wallet-adapter-dropdown-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 37px;
+    color: var(--text-color);
+  }
+
+  .wallet-adapter-dropdown-list-item:not([disabled]):hover {
+    background-color: var(--hover-background-color);
+  }
+</style>

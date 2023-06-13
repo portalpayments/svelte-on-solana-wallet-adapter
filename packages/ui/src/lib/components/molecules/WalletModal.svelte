@@ -1,12 +1,12 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import { byInstalledStatus } from "./utils";
+  import { byInstalledStatus } from "../../utils";
   import { walletStore } from "@portal-payments/wallet-adapter-core";
   import { createEventDispatcher } from "svelte";
-  import ChooseWalletAdapterButton from "./ChooseWalletAdapterButton.svelte";
-  import GenericWalletPicture from "./GenericWalletPicture.svelte";
-  import RotatingArrow from "./RotatingArrow.svelte";
-  import CloseButton from "./CloseButton.svelte";
+  import Button from "../atoms/Button.svelte";
+  import GenericWalletPicture from "../atoms/GenericWalletPicture.svelte";
+  import RotatingArrow from "../atoms/RotatingArrow.svelte";
+  import CloseButton from "../atoms/CloseButton.svelte";
 
   let isShowingUninstalledWallets = false,
     backdrop: HTMLDivElement,
@@ -86,10 +86,10 @@
       <ul class="wallet-adapter-modal-list">
         {#each installedWalletAdaptersWithReadyState as walletAdapterWithReadyState}
           <li>
-            <ChooseWalletAdapterButton on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+            <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
               {walletAdapterWithReadyState.adapter.name}
 
-              <svelte:fragment slot="start-icon">
+              <svelte:fragment slot="icon">
                 <img
                   class="wallet-adapter-icon"
                   src={walletAdapterWithReadyState.adapter.icon}
@@ -97,10 +97,10 @@
                 />
               </svelte:fragment>
 
-              <svelte:fragment slot="status">
+              <svelte:fragment slot="bonus-text">
                 {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
               </svelte:fragment>
-            </ChooseWalletAdapterButton>
+            </Button>
           </li>
         {/each}
       </ul>
@@ -123,10 +123,10 @@
         <ul class="wallet-adapter-modal-list" transition:slide={{ duration: 300 }}>
           {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
             <li>
-              <ChooseWalletAdapterButton on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+              <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
                 {walletAdapterWithReadyState.adapter.name}
 
-                <svelte:fragment slot="start-icon">
+                <svelte:fragment slot="icon">
                   <img
                     class="wallet-adapter-icon"
                     src={walletAdapterWithReadyState.adapter.icon}
@@ -134,10 +134,10 @@
                   />
                 </svelte:fragment>
 
-                <svelte:fragment slot="status">
+                <svelte:fragment slot="bonus-text">
                   {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
                 </svelte:fragment>
-              </ChooseWalletAdapterButton>
+              </Button>
             </li>
           {/each}
         </ul>
@@ -198,6 +198,48 @@
     color: var(--text-color);
   }
 
+  .wallet-adapter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity linear 150ms;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    overflow-y: auto;
+  }
+
+  .wallet-adapter-modal.wallet-adapter-modal-fade-in {
+    opacity: 1;
+  }
+
+  .wallet-adapter-modal-content {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1050;
+    max-width: 400px;
+    border-radius: 10px;
+    background: var(--modal-background-color);
+    box-shadow: var(--shadow);
+    font-family: var(--fonts);
+    flex: 1;
+  }
+
+  .wallet-adapter-modal-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0;
+    padding: 64px 48px 48px 48px;
+    text-align: center;
+    color: var(--text-color);
+  }
+
   @media (max-width: 374px) {
     .wallet-adapter-modal-title {
       font-size: 18px;
@@ -211,9 +253,55 @@
     list-style: none;
   }
 
-  .wallet-adapter-modal-list .wallet-adapter-button-start-icon img.wallet-adapter-icon {
-    width: 28px;
-    height: 28px;
+  .wallet-adapter-modal-list-more {
+    cursor: pointer;
+    border: none;
+    padding: 12px 24px 24px 12px;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: var(--text-color);
+    font-family: var(--fonts);
+  }
+
+  .wallet-adapter-modal-list-more span {
+    font-size: 16px;
+  }
+
+  .wallet-adapter-modal-middle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 24px 24px;
+    box-sizing: border-box;
+  }
+
+  .wallet-adapter-modal-middle-button {
+    display: block;
+    cursor: pointer;
+    margin-top: 48px;
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color);
+  }
+
+  @media (max-width: 374px) {
+    .wallet-adapter-modal-title {
+      font-size: 18px;
+    }
+  }
+
+  .wallet-adapter-modal-list {
+    margin: 0 0 12px 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
   }
 
   .wallet-adapter-modal-list-more {
