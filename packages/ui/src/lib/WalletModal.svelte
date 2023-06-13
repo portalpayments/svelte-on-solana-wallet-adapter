@@ -154,3 +154,103 @@
     {/if}
   </div>
 </div>
+
+<style>
+  .wallet-adapter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity linear 150ms;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    overflow-y: auto;
+  }
+
+  .wallet-adapter-modal.wallet-adapter-modal-fade-in {
+    opacity: 1;
+  }
+
+  .wallet-adapter-modal-content {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1050;
+    max-width: 400px;
+    border-radius: 10px;
+    background: var(--modal-background-color);
+    box-shadow: var(--shadow);
+    font-family: var(--fonts);
+    flex: 1;
+  }
+
+  .wallet-adapter-modal-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0;
+    padding: 64px 48px 48px 48px;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  @media (max-width: 374px) {
+    .wallet-adapter-modal-title {
+      font-size: 18px;
+    }
+  }
+
+  .wallet-adapter-modal-list {
+    margin: 0 0 12px 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+  }
+
+  .wallet-adapter-modal-list .wallet-adapter-button-start-icon img.wallet-adapter-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .wallet-adapter-modal-list-more {
+    cursor: pointer;
+    border: none;
+    padding: 12px 24px 24px 12px;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: var(--text-color);
+    font-family: var(--fonts);
+  }
+
+  .wallet-adapter-modal-list-more span {
+    font-size: 16px;
+  }
+
+  .wallet-adapter-modal-middle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 24px 24px;
+    box-sizing: border-box;
+  }
+
+  .wallet-adapter-modal-middle-button {
+    display: block;
+    cursor: pointer;
+    margin-top: 48px;
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color);
+  }
+</style>
