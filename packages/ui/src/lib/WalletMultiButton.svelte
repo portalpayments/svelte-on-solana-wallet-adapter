@@ -158,7 +158,7 @@ TODO: fix wallet-adapter-core -->
         {#if profilePicture}
           <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
         {:else}
-          <!-- Show the wallet *app* icon and wallet *app* name -->
+          <!-- Show the wallet *adapter* icon and wallet *adapter* name -->
           <img class="wallet-adapter-icon" src={wallet.icon} alt={`${wallet.name} icon`} />
         {/if}
       </svelte:fragment>

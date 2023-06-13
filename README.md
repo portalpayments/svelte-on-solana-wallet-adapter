@@ -4,8 +4,10 @@
 
 Notable changes:
 
+ - Support wallet names.
+ - Support profile pictures ('PFPs').
  - Wallet adapters that are installed are shown first
- - Old types are in the process of being renamed. Eg wallet adapters are called 'WalletAdapter' not 'wallet'. This is intended to make code easier to read, avoiding code that confuses wallet adapters with wallet addresses. 
+ - Old types are in the process of being renamed. Eg wallet adapters are called 'WalletAdapter' not 'wallet'. This is intended to make code easier to read, avoiding code that confuses wallet adapters with wallet addresses.
  - TODO: support wallet standard, as individual wallet adapters are no longer necessary.
 
 TypeScript wallet adapter and UI components for Solana applications using [Svelte](https://svelte.dev/). This package supports [SvelteKit](https://kit.svelte.dev/), making it possible to build Solana Dapps in SPA or SSR mode, as well as Svelte stores for both vanilla Solana and Anchor connections.
