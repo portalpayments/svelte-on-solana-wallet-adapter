@@ -24,7 +24,7 @@
     opacity: 0.6;
   }
 
-  button {
+  .wallet-adapter-button {
     width: 100%;
   }
 </style>

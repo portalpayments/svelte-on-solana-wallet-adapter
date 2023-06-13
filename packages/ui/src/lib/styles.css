@@ -285,7 +285,6 @@ The styling should be very boring and minimal */
 
 .wallet-adapter-modal-list-more svg {
   transition: all 0.1s ease;
-  fill: rgba(255, 255, 255, 1);
   margin-left: 0.5rem;
 }
 
