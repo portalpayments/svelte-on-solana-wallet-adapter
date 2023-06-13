@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { walletStore } from '@portal-payments/wallet-adapter-core';
-  import ChooseWalletAdapterButton from './ChooseWalletAdapterButton.svelte';
-  import WalletConnectButton from './WalletConnectButton.svelte';
-  import WalletModal from './WalletModal.svelte';
-  import { copyToClipboard, truncateWalletAddress, sleep } from './utils';
-  import type { PublicKey} from "@solana/web3.js";
-  import './styles.css';
+  import { walletStore } from "@portal-payments/wallet-adapter-core";
+  import ChooseWalletAdapterButton from "./ChooseWalletAdapterButton.svelte";
+  import WalletConnectButton from "./WalletConnectButton.svelte";
+  import WalletModal from "./WalletModal.svelte";
+  import { copyToClipboard, truncateWalletAddress, sleep } from "./utils";
+  import type { PublicKey } from "@solana/web3.js";
+  import "./styles.css";
 
-  const log = console.log 
+  const log = console.log;
 
   export let maxNumberOfWallets = 3;
 
@@ -40,11 +40,9 @@
   // Was previously called 'base58'
   $: walletAddress = publicKey?.toBase58();
 
-  let truncatedWalletAddress: string | null = null
-  let walletName: string | null = null
-  let profilePicture: string | null = null
-
-  
+  let truncatedWalletAddress: string | null = null;
+  let walletName: string | null = null;
+  let profilePicture: string | null = null;
 
   const copyWalletName = async () => {
     if (!walletAddress) {
@@ -52,7 +50,7 @@
     }
     await copyToClipboard(walletName);
     hasRecentlyCopiedWalletName = true;
-    await sleep(400)
+    await sleep(400);
     hasRecentlyCopiedWalletName = false;
   };
 
@@ -62,25 +60,25 @@
     }
     await copyToClipboard(walletAddress);
     hasRecentlyCopiedWalletAddress = true;
-    await sleep(400)
+    await sleep(400);
     hasRecentlyCopiedWalletAddress = false;
   };
 
   const openDropdown = () => {
-    isDropDrownVisible = true
+    isDropDrownVisible = true;
   };
 
   const closeDropdown = () => {
-    isDropDrownVisible = false
+    isDropDrownVisible = false;
   };
 
   const openModal = () => {
     isModalVisible = true;
     closeDropdown();
   };
-  
+
   const closeModal = () => {
-    isModalVisible = false
+    isModalVisible = false;
   };
 
   walletStore.subscribe(async (newValue) => {
@@ -89,14 +87,13 @@
     // Let's give it a better name so the next line makes sense.
     const walletAdapter = newValue.wallet;
     if (!walletAdapter || !walletAddress) {
-      return null; 
+      return null;
     }
     truncatedWalletAddress = truncateWalletAddress(walletAddress);
     const walletNameAndProfilePicture = await walletAddressToNameAndProfilePicture(newValue.publicKey);
     walletName = walletNameAndProfilePicture.walletName;
-    profilePicture = walletNameAndProfilePicture.profilePicture;    
+    profilePicture = walletNameAndProfilePicture.profilePicture;
   });
-
 
   const connectWalletAdapter = async (event) => {
     closeModal();
@@ -111,30 +108,22 @@
 
   // Was called clickOutside
   // For Svelte 'use' directive, see https://svelte.dev/docs#template-syntax-element-directives-use-action
-  const setClickHandlerForOutsideElement = (
-    element: HTMLElement,
-    clickHandler: ClickHandler,
-  ): unknown => {
+  const setClickHandlerForOutsideElement = (element: HTMLElement, clickHandler: ClickHandler): unknown => {
     let currentClickHandler = clickHandler;
     const onClick = (event: MouseEvent) => {
-      if (
-        element &&
-        event.target instanceof Node &&
-        !element.contains(event.target) &&
-        !event.defaultPrevented
-      ) {
+      if (element && event.target instanceof Node && !element.contains(event.target) && !event.defaultPrevented) {
         currentClickHandler();
       }
-    }
+    };
 
-    document.body.addEventListener('click', onClick, true);
+    document.body.addEventListener("click", onClick, true);
 
     return {
       update(newClickHandler: ClickHandler) {
         currentClickHandler = newClickHandler;
       },
       destroy() {
-        document.body.removeEventListener('click', onClick, true);
+        document.body.removeEventListener("click", onClick, true);
       },
     };
   };
@@ -150,10 +139,7 @@ TODO: fix wallet-adapter-core -->
   <WalletConnectButton />
 {:else}
   <div class="wallet-adapter-dropdown">
-    <ChooseWalletAdapterButton
-      on:click={openDropdown}
-      class="wallet-adapter-button-trigger"
-    >
+    <ChooseWalletAdapterButton on:click={openDropdown} class="wallet-adapter-button-trigger">
       <svelte:fragment slot="start-icon">
         {#if profilePicture}
           <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
@@ -178,46 +164,24 @@ TODO: fix wallet-adapter-core -->
         }}
       >
         {#if walletName}
-          <li
-            on:click={copyWalletName}
-            class="wallet-adapter-dropdown-list-item"
-            role="menuitem"
-          >
-            {hasRecentlyCopiedWalletName ? 'Copied' : 'Copy wallet name'}
+          <li on:click={copyWalletName} class="wallet-adapter-dropdown-list-item" role="menuitem">
+            {hasRecentlyCopiedWalletName ? "Copied" : "Copy wallet name"}
           </li>
         {/if}
-        {#if ! walletName && ! hideWalletAddressIfUserHasName }
-          <li
-            on:click={copyWalletAddress}
-            class="wallet-adapter-dropdown-list-item"
-            role="menuitem"
-          >
-            {hasRecentlyCopiedWalletAddress ? 'Copied' : 'Copy wallet address'}
+        {#if !walletName && !hideWalletAddressIfUserHasName}
+          <li on:click={copyWalletAddress} class="wallet-adapter-dropdown-list-item" role="menuitem">
+            {hasRecentlyCopiedWalletAddress ? "Copied" : "Copy wallet address"}
           </li>
         {/if}
-        <li
-          on:click={openModal}
-          class="wallet-adapter-dropdown-list-item"
-          role="menuitem"
-        >
+        <li on:click={openModal} class="wallet-adapter-dropdown-list-item" role="menuitem">
           Connect a different wallet
         </li>
-        <li
-          on:click={disconnectWalletAdapter}
-          class="wallet-adapter-dropdown-list-item"
-          role="menuitem"
-        >
-          Disconnect
-        </li>
+        <li on:click={disconnectWalletAdapter} class="wallet-adapter-dropdown-list-item" role="menuitem">Disconnect</li>
       </ul>
     {/if}
   </div>
 {/if}
 
 {#if isModalVisible}
-  <WalletModal
-    on:close={closeModal}
-    on:connect={connectWalletAdapter}
-    {maxNumberOfWallets}
-  />
+  <WalletModal on:close={closeModal} on:connect={connectWalletAdapter} {maxNumberOfWallets} />
 {/if}

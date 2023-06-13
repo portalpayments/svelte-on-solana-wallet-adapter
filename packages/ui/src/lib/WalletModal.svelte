@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { slide } from 'svelte/transition';
-  import { walletStore } from '@portal-payments/wallet-adapter-core';
-  import { createEventDispatcher } from 'svelte';
-  import ChooseWalletAdapterButton from './ChooseWalletAdapterButton.svelte';
-  import type { WalletName } from '@solana/wallet-adapter-base';
+  import { slide } from "svelte/transition";
+  import { byInstalledStatus } from "./utils";
+  import { walletStore } from "@portal-payments/wallet-adapter-core";
+  import { createEventDispatcher } from "svelte";
+  import ChooseWalletAdapterButton from "./ChooseWalletAdapterButton.svelte";
+  import type { WalletName } from "@solana/wallet-adapter-base";
 
   export let maxNumberOfWallets;
 
@@ -12,10 +13,8 @@
     backdrop: HTMLDivElement,
     container: HTMLDivElement;
 
-  let numberOfWalletsShown: number
-  $: numberOfWalletsShown = showMoreOptions
-    ? $walletStore.wallets.length
-    : maxNumberOfWallets;
+  let numberOfWalletsShown: number;
+  $: numberOfWalletsShown = showMoreOptions ? $walletStore.wallets.length : maxNumberOfWallets;
 
   // Show installed wallet adapters first.
   // 'wallet-adapter-core' incorrectly uses 'Wallet' but this is a combination of a wallet adapter and a ready state.
@@ -24,14 +23,12 @@
     .sort(byInstalledStatus);
 
   // Was walletsAvailable
-  $: installedWalletAdapterCount = $walletStore.wallets.filter(
-    wallet => wallet.readyState === 'Installed',
-  ).length;
+  $: installedWalletAdapterCount = $walletStore.wallets.filter((wallet) => wallet.readyState === "Installed").length;
 
   const dispatch = createEventDispatcher();
 
   function connect(name) {
-    dispatch('connect', name);
+    dispatch("connect", name);
   }
 
   function toggleMoreOptions() {
@@ -44,24 +41,23 @@
 
   function closeModal(event) {
     if (event.target === backdrop || event.target === container) {
-      dispatch('close');
+      dispatch("close");
     }
   }
 
   function handleKeyup(event) {
-    if (event.key == 'Escape') {
-      dispatch('close');
+    if (event.key == "Escape") {
+      dispatch("close");
     }
   }
   function getStarted() {
     const torusWallet = $walletStore.wallets.find(
-      (wallet: { adapter: { name: WalletName } }) =>
-        wallet.adapter.name === 'Torus',
-      );
+      (wallet: { adapter: { name: WalletName } }) => wallet.adapter.name === "Torus"
+    );
     if (torusWallet) {
       connect(torusWallet.adapter.name);
     } else {
-      dispatch('close');
+      dispatch("close");
     }
   }
 </script>
@@ -76,20 +72,17 @@
   class="wallet-adapter-modal wallet-adapter-modal-fade-in"
   role="dialog"
   bind:this={backdrop}
-  on:click={event => closeModal(event)}
+  on:click={(event) => closeModal(event)}
 >
   <!-- TODO: fix name. It's the content for the modal -->
   <div class="wallet-adapter-modal-wrapper">
     <h1 class="wallet-adapter-modal-title">
       {installedWalletAdapterCount
-        ? 'Connect a wallet on Solana to continue'
+        ? "Connect a wallet on Solana to continue"
         : `You'll need a wallet on Solana to continue`}
     </h1>
 
-    <button
-      on:click={() => dispatch('close')}
-      class="wallet-adapter-modal-button-close"
-    >
+    <button on:click={() => dispatch("close")} class="wallet-adapter-modal-button-close">
       <svg width="14" height="14">
         <path
           d="M14 12.461 8.3 6.772l5.234-5.233L12.006 0 6.772 5.234 1.54 0 0 1.539l5.234 5.233L0 12.006l1.539 1.528L6.772 8.3l5.69 5.7L14 12.461z"
@@ -101,19 +94,19 @@
       <ul class="wallet-adapter-modal-list">
         {#each availableWalletAdaptersWithReadyState as walletAdapterWithReadyState}
           <li>
-            <ChooseWalletAdapterButton
-              on:click={() => connect(walletAdapterWithReadyState.adapter.name)}
-            >
+            <ChooseWalletAdapterButton on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
               {walletAdapterWithReadyState.adapter.name}
 
               <svelte:fragment slot="start-icon">
-                <img class='wallet-adapter-icon' src={walletAdapterWithReadyState.adapter.icon} alt={`${walletAdapterWithReadyState.adapter.name} icon`} />
+                <img
+                  class="wallet-adapter-icon"
+                  src={walletAdapterWithReadyState.adapter.icon}
+                  alt={`${walletAdapterWithReadyState.adapter.name} icon`}
+                />
               </svelte:fragment>
 
               <svelte:fragment slot="status">
-                {walletAdapterWithReadyState.readyState === 'Installed'
-                  ? 'Detected'
-                  : ''}
+                {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
               </svelte:fragment>
             </ChooseWalletAdapterButton>
           </li>
@@ -128,7 +121,7 @@
           on:click={() => toggleMoreOptions()}
         >
           <span>
-            {showMoreOptions ? 'Less' : 'More'} options
+            {showMoreOptions ? "Less" : "More"} options
           </span>
 
           <svg
@@ -145,20 +138,8 @@
       {/if}
     {:else}
       <div class="wallet-adapter-modal-middle">
-        <svg
-          width="97"
-          height="96"
-          viewBox="0 0 97 96"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle
-            cx="48.5"
-            cy="48"
-            r="48"
-            fill="url(#paint0_linear_880_5115)"
-            fill-opacity="0.1"
-          />
+        <svg width="97" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48.5" cy="48" r="48" fill="url(#paint0_linear_880_5115)" fill-opacity="0.1" />
           <circle
             cx="48.5"
             cy="48"
@@ -239,20 +220,11 @@
               <stop offset="1" stop-color="#00D18C" />
             </linearGradient>
             <clip-path id="clip0_880_5115">
-              <rect
-                width="48"
-                height="48"
-                fill="white"
-                transform="translate(24.5 24)"
-              />
+              <rect width="48" height="48" fill="white" transform="translate(24.5 24)" />
             </clip-path>
           </defs>
         </svg>
-        <button
-          type="button"
-          class="wallet-adapter-modal-middle-button"
-          on:click={getStarted}>Get started</button
-        >
+        <button type="button" class="wallet-adapter-modal-middle-button" on:click={getStarted}>Get started</button>
       </div>
       <button
         class="wallet-adapter-modal-list-more"
@@ -261,9 +233,7 @@
         on:click={() => toggleExtensionsAvailables()}
       >
         <span>
-          {showExtensionsAvailables
-            ? 'Hide options'
-            : 'Already have a wallet? View options'}
+          {showExtensionsAvailables ? "Hide options" : "Already have a wallet? View options"}
         </span>
 
         <svg
@@ -279,16 +249,10 @@
       </button>
 
       {#if showExtensionsAvailables}
-        <ul
-          class="wallet-adapter-modal-list"
-          transition:slide={{ duration: 300 }}
-        >
+        <ul class="wallet-adapter-modal-list" transition:slide={{ duration: 300 }}>
           {#each $walletStore.wallets.slice(0, numberOfWalletsShown) as { adapter: { name, icon, url }, readyState }}
             <li>
-              <ChooseWalletAdapterButton
-                on:click={() =>
-                  connect(name)}
-              >
+              <ChooseWalletAdapterButton on:click={() => connect(name)}>
                 {name}
 
                 <svelte:fragment slot="start-icon">
@@ -296,9 +260,7 @@
                 </svelte:fragment>
 
                 <svelte:fragment slot="status">
-                  {readyState === 'Installed'
-                    ? 'Detected'
-                    : ''}
+                  {readyState === "Installed" ? "Detected" : ""}
                 </svelte:fragment>
               </ChooseWalletAdapterButton>
             </li>

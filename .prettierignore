@@ -1,7 +1,1 @@
-docs
-lib
-build
-out
-.next
-*.svg
-
+dist
