@@ -131,7 +131,7 @@
 TODO: fix wallet-adapter-core -->
 {#if !wallet}
   <Button buttonVersion="capsule" on:click={openModal}>
-    <slot>Select Wallet</slot>
+    <slot>Connect wallet</slot>
   </Button>
 {:else if !walletAddress}
   <WalletConnectButton />
