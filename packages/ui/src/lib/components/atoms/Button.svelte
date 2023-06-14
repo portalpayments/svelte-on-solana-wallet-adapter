@@ -45,7 +45,8 @@ The styling should be very boring and minimal */
   }
 
   button:not([disabled]):hover {
-    background-color: var(--hover-background-color);
+    background-color: linear-gradient(90deg, #999, #666);
+    background-origin: border-box;
     color: var(--hover-text-color);
   }
 
