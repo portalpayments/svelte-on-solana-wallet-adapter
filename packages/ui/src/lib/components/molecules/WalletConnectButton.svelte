@@ -32,9 +32,7 @@
     {/if}
   </svelte:fragment>
 
-  <slot />
-
-  <slot name="bonus-text" />
+  {text}
 </Button>
 
 <style>
