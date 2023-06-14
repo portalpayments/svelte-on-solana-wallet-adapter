@@ -3,10 +3,10 @@
   import { initialize } from "@portal-payments/wallet-adapter-core";
   import type { WalletError } from "@solana/wallet-adapter-base";
 
-  export let localStorageKey: string,
-    wallets: Adapter[],
-    autoConnect = false,
-    onError = (error: WalletError) => console.error(error);
+  export let localStorageKey: string;
+  export let walletAdapters: Adapter[];
+  export let autoConnect = false;
+  export let onError = (error: WalletError) => console.error(error);
 
   $: wallets && initialize({ wallets, autoConnect, localStorageKey, onError });
 </script>
