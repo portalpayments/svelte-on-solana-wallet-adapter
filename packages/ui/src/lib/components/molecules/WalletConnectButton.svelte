@@ -4,12 +4,14 @@
 
   let text;
 
-  $: ({ wallet, connect, connecting, connected } = $walletStore);
+  // walletStore.wallet is actually a walletAdapter
+  // TODO: fix walletStore
+  $: ({ wallet: walletAdapter, connect, connecting, connected } = $walletStore);
 
   $: {
-    text = "Connect Wallet";
-    if (wallet) text = "Connect";
-    if (connecting) text = "Connecting ...";
+    text = "Connect wallet";
+    if (walletAdapter) text = "Connect";
+    if (connecting) text = "Connecting…";
     if (connected) text = "Connected";
   }
 
@@ -23,10 +25,10 @@
   }
 </script>
 
-<Button on:click={handleClick} isDisabled={!wallet || connecting || connected} buttonVersion="capsule">
+<Button on:click={handleClick} isDisabled={!walletAdapter || connecting || connected} buttonVersion="capsule">
   <svelte:fragment slot="icon">
-    {#if wallet}
-      <img src={wallet.icon} class="wallet-adapter-icon" alt={`${wallet.name} icon`} />
+    {#if walletAdapter}
+      <img src={walletAdapter.icon} class="wallet-adapter-icon" alt={`${walletAdapter.name} icon`} />
     {/if}
   </svelte:fragment>
 
