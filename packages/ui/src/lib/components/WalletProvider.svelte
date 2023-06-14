@@ -4,7 +4,7 @@
   import type { WalletError } from "@solana/wallet-adapter-base";
 
   export let localStorageKey: string;
-  export let walletAdapters: Adapter[];
+  export let wallets: Adapter[];
   export let autoConnect = false;
   export let onError = (error: WalletError) => console.error(error);
 
