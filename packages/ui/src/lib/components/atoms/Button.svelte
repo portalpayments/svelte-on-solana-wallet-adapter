@@ -28,6 +28,7 @@ The styling should be very boring and minimal */
     border: none;
     cursor: pointer;
     display: flex;
+    gap: 12px;
     align-items: center;
     font-family: var(--fonts);
     font-size: 16px;
