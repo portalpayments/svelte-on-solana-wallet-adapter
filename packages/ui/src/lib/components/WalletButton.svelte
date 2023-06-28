@@ -153,25 +153,36 @@
     status = "Connect wallet";
     if (walletAdapter) status = "Connect";
     if (isConnecting) status = "Connecting…";
-    if (isConnected) status = "Connected";
+    if (isConnected) status = walletName || truncatedWalletAddress;
+  }
+
+  let icon: string | null;
+  let isIconAProfilePicture = false;
+
+  $: {
+    if (!isConnected) {
+      if (walletAdapter) {
+        icon = walletAdapter.icon;
+      }
+    } else {
+      if (profilePicture) {
+        icon = profilePicture;
+        isIconAProfilePicture = true;
+      } else {
+        icon = walletAdapter?.icon;
+      }
+    }
   }
 </script>
 
 <div class="connected-wallet-with-dropdown">
-  <Button on:click={isConnected ? openDropdown : showConnectionUI} isDisabled={isConnecting}>
-    <svelte:fragment slot="icon">
-      {#if !isConnected}
-        {#if walletAdapter}
-          <img src={walletAdapter.icon} class="wallet-adapter-icon" alt={`${walletAdapter.name} icon`} />
-        {/if}
-      {:else if profilePicture}
-        <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
-      {:else}
-        <img class="wallet-adapter-icon" src={walletAdapter.icon} alt={`${walletAdapter.name} icon`} />
-      {/if}
-    </svelte:fragment>
-    {isConnected ? walletName || truncatedWalletAddress : status}
-  </Button>
+  <Button
+    on:click={isConnected ? openDropdown : showConnectionUI}
+    isDisabled={isConnecting}
+    {icon}
+    {isIconAProfilePicture}
+    text={status}
+  />
   {#if isDropDrownVisible}
     <!-- TODO: fix accessability and remove the warning below -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->

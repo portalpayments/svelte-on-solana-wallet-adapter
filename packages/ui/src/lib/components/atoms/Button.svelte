@@ -1,25 +1,23 @@
 <script lang="ts">
+  export let text: string | null = null;
+  export let icon: string | null = null;
+  export let isIconAProfilePicture: boolean = false;
   export let isDisabled: boolean = false;
 </script>
 
 <button disabled={isDisabled} on:click>
-  {#if $$slots["icon"]}
-    <slot name="icon" />
+  {#if icon}
+    <img class={`icon ${isIconAProfilePicture ? "profile-picture" : ""}`} src={icon} alt="icon" />
   {/if}
-  <slot />
-  <slot name="bonus-text" />
+  {text}
 </button>
 
 <style>
-  button:has(.profile-picture) {
-    padding-left: 4px;
-  }
-
   button {
-    /* Gradient border hack below */
-    /* Colors from https://solana.com/branding 
-  Then ran through https://www.learnui.design/tools/gradient-generator.html to remove gray dead-zone
-  with Precision set to 1 */
+    /* Gradient border hack below 
+    Colors from https://solana.com/branding 
+    Then ran through https://www.learnui.design/tools/gradient-generator.html to remove gray dead-zone
+    with Precision set to 1 */
     background: linear-gradient(90deg, #9945ff, #00c2ff, #14f195);
     /* Fill the inside with white */
     background-origin: border-box;
@@ -28,16 +26,7 @@
     border: 2px solid transparent;
   }
 
-  button :global(.profile-picture) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-  }
-
-  button :global(.wallet-adapter-icon) {
+  .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,9 +34,13 @@
     aspect-ratio: 1;
   }
 
-  button :global(.bonus-text) {
-    margin-left: auto;
-    font-size: 14px;
-    opacity: 0.6;
+  button:has(.profile-picture) {
+    padding-left: 4px;
+  }
+
+  /* User pictures are bigger and round */
+  .icon.profile-picture {
+    border-radius: 50%;
+    width: 38px;
   }
 </style>
