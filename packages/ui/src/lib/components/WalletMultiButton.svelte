@@ -125,14 +125,25 @@
       },
     };
   };
+
+  const handleClick = () => {
+    try {
+      if (!walletAdapter) {
+        openModal();
+        return;
+      }
+      connect();
+    } catch (error) {
+      // TODO: old code threw away errors, not sure if we should too.
+      console.log(error);
+    }
+  };
+
+  $: isConnected = Boolean(walletAddress) && Boolean(walletAdapter);
 </script>
 
-{#if !walletAdapter}
-  <Button buttonVersion="capsule" on:click={openModal}>
-    <slot>Connect wallet</slot>
-  </Button>
-{:else if !walletAddress}
-  <WalletConnectButton />
+{#if !isConnected}
+  <WalletConnectButton {handleClick} />
 {:else}
   <div class="connected-wallet-with-dropdown">
     <Button buttonVersion="capsule" on:click={openDropdown}>

@@ -1,6 +1,9 @@
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
+  import type { Adapter } from "@solana/wallet-adapter-base";
   import Button from "../atoms/Button.svelte";
+
+  export let handleClick: () => void;
 
   let text;
 
@@ -13,15 +16,6 @@
     if (walletAdapter) text = "Connect";
     if (connecting) text = "Connecting…";
     if (connected) text = "Connected";
-  }
-
-  function handleClick(event: MouseEvent) {
-    try {
-      connect();
-    } catch (error) {
-      // TODO: old code threw away errors, not sure if we should too.
-      console.log(error);
-    }
   }
 </script>
 
