@@ -84,7 +84,7 @@
     isModalVisible = false;
   };
 
-  let isGettingWalletName = false;
+  let isLoadingNameAndProfilePicture = false;
 
   walletStore.subscribe(async (newValue) => {
     const walletAddress = newValue.publicKey?.toBase58();
@@ -95,11 +95,11 @@
       return null;
     }
     truncatedWalletAddress = truncateWalletAddress(walletAddress);
-    isGettingWalletName = true;
+    isLoadingNameAndProfilePicture = true;
     const walletNameAndProfilePicture = await walletAddressToNameAndProfilePicture(newValue.publicKey);
     walletName = walletNameAndProfilePicture.walletName;
     profilePicture = walletNameAndProfilePicture.profilePicture;
-    isGettingWalletName = false;
+    isLoadingNameAndProfilePicture = false;
   });
 
   const connectWalletAdapter = async (event) => {
@@ -180,6 +180,7 @@
     on:click={isConnected ? openDropdown : showConnectionUI}
     isDisabled={isConnecting}
     {icon}
+    {isLoadingNameAndProfilePicture}
     {isIconAProfilePicture}
     text={status}
   />
