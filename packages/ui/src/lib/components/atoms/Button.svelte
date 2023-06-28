@@ -51,7 +51,7 @@
   }
 
   button.is-loading-name-and-profile-picture .sweeper {
-    animation: sweep 4500ms ease-out 0s infinite normal none;
+    animation: sweep 3000ms ease-out 0s infinite normal none;
   }
 
   .icon {
