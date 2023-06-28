@@ -10,6 +10,10 @@ export const sleep = async (timeInMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 };
 
+export const stringify = (object: any) => {
+  return JSON.stringify(object, null, 2);
+};
+
 export const byInstalledStatus = (a, b) => {
   if (a.readyState === "Installed" && b.readyState !== "Installed") {
     return -1;

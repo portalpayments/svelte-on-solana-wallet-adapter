@@ -2,7 +2,7 @@
   import { walletStore } from "@portal-payments/wallet-adapter-core";
   import Button from "./atoms/Button.svelte";
   import WalletModal from "./molecules/WalletModal.svelte";
-  import { copyToClipboard, truncateWalletAddress, sleep } from "../utils";
+  import { copyToClipboard, truncateWalletAddress, sleep, stringify } from "../utils";
   import type { PublicKey } from "@solana/web3.js";
   import "./styles.css";
 
@@ -16,8 +16,6 @@
       profilePicture: null,
     };
   };
-
-  export let hideWalletAddressIfUserHasName = true;
 
   // Was called CallbackType but TS doesn't use Hungarian notation.
   // and this isn't used to control flow.
@@ -133,7 +131,7 @@
     };
   };
 
-  const handleClick = () => {
+  const showConnectionUI = () => {
     try {
       if (!walletAdapter) {
         openModal();
@@ -155,58 +153,47 @@
   }
 </script>
 
-{#if !isConnected}
-  <Button buttonVersion="capsule" on:click={handleClick} isDisabled={isConnecting}>
+<div class="connected-wallet-with-dropdown">
+  <Button buttonVersion="capsule" on:click={isConnected ? openDropdown : showConnectionUI} isDisabled={isConnecting}>
     <svelte:fragment slot="icon">
-      {#if walletAdapter}
-        <img src={walletAdapter.icon} class="wallet-adapter-icon" alt={`${walletAdapter.name} icon`} />
+      {#if !isConnected}
+        {#if walletAdapter}
+          <img src={walletAdapter.icon} class="wallet-adapter-icon" alt={`${walletAdapter.name} icon`} />
+        {/if}
+      {:else if profilePicture}
+        <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
+      {:else}
+        <img class="wallet-adapter-icon" src={walletAdapter.icon} alt={`${walletAdapter.name} icon`} />
       {/if}
     </svelte:fragment>
-
-    {status}
+    {isConnected ? walletName || truncatedWalletAddress : status}
   </Button>
-{:else}
-  <div class="connected-wallet-with-dropdown">
-    <Button buttonVersion="capsule" on:click={openDropdown}>
-      <svelte:fragment slot="icon">
-        {#if profilePicture}
-          <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
-        {:else}
-          <!-- Show the wallet *adapter* icon and wallet *adapter* name -->
-          <img class="wallet-adapter-icon" src={walletAdapter.icon} alt={`${walletAdapter.name} icon`} />
-        {/if}
-      </svelte:fragment>
-      {walletName || truncatedWalletAddress}
-    </Button>
-    {#if isDropDrownVisible}
-      <!-- TODO: fix accessability and remove the warning below -->
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <ul
-        aria-label="dropdown-list"
-        class="dropdown-list dropdown-list-active"
-        role="menu"
-        use:setClickHandlerForOutsideElement={() => {
-          if (isDropDrownVisible) {
-            closeDropdown();
-          }
-        }}
-      >
-        {#if walletName}
-          <li on:click={copyWalletName} class="dropdown-list-item" role="menuitem">
-            {hasRecentlyCopiedWalletName ? "Copied" : "Copy wallet name"}
-          </li>
-        {/if}
-        {#if !walletName && !hideWalletAddressIfUserHasName}
-          <li on:click={copyWalletAddress} class="dropdown-list-item" role="menuitem">
-            {hasRecentlyCopiedWalletAddress ? "Copied" : "Copy wallet address"}
-          </li>
-        {/if}
-        <li on:click={openModal} class="dropdown-list-item" role="menuitem">Connect a different wallet</li>
-        <li on:click={disconnectWalletAdapter} class="dropdown-list-item" role="menuitem">Disconnect</li>
-      </ul>
-    {/if}
-  </div>
-{/if}
+  {#if isDropDrownVisible}
+    <!-- TODO: fix accessability and remove the warning below -->
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <ul
+      aria-label="dropdown-list"
+      class="dropdown-list dropdown-list-active"
+      role="menu"
+      use:setClickHandlerForOutsideElement={() => {
+        if (isDropDrownVisible) {
+          closeDropdown();
+        }
+      }}
+    >
+      {#if walletName}
+        <li on:click={copyWalletName} class="dropdown-list-item" role="menuitem">
+          {hasRecentlyCopiedWalletName ? "Copied" : "Copy wallet name"}
+        </li>
+      {/if}
+      <li on:click={copyWalletAddress} class="dropdown-list-item" role="menuitem">
+        {hasRecentlyCopiedWalletAddress ? "Copied" : "Copy wallet address"}
+      </li>
+      <li on:click={openModal} class="dropdown-list-item" role="menuitem">Connect a different wallet</li>
+      <li on:click={disconnectWalletAdapter} class="dropdown-list-item" role="menuitem">Disconnect</li>
+    </ul>
+  {/if}
+</div>
 
 {#if isModalVisible}
   <WalletModal on:close={closeModal} on:connect={connectWalletAdapter} />
