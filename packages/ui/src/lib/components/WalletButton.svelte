@@ -1,6 +1,6 @@
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import ButtonWithIcon from "./atoms/ButtonWithIcon.svelte";
+  import Button from "./atoms/Button.svelte";
   import WalletModal from "./molecules/WalletModal.svelte";
   import { copyToClipboard, truncateWalletAddress, sleep, stringify } from "../utils";
   import type { PublicKey } from "@solana/web3.js";
@@ -84,6 +84,8 @@
     isModalVisible = false;
   };
 
+  let isGettingWalletName = false;
+
   walletStore.subscribe(async (newValue) => {
     const walletAddress = newValue.publicKey?.toBase58();
     // The walletStore has a misnamed variable called 'wallet' which is actually a wallet adapter.
@@ -93,9 +95,11 @@
       return null;
     }
     truncatedWalletAddress = truncateWalletAddress(walletAddress);
+    isGettingWalletName = true;
     const walletNameAndProfilePicture = await walletAddressToNameAndProfilePicture(newValue.publicKey);
     walletName = walletNameAndProfilePicture.walletName;
     profilePicture = walletNameAndProfilePicture.profilePicture;
+    isGettingWalletName = false;
   });
 
   const connectWalletAdapter = async (event) => {
@@ -154,11 +158,7 @@
 </script>
 
 <div class="connected-wallet-with-dropdown">
-  <ButtonWithIcon
-    buttonVersion="capsule"
-    on:click={isConnected ? openDropdown : showConnectionUI}
-    isDisabled={isConnecting}
-  >
+  <Button on:click={isConnected ? openDropdown : showConnectionUI} isDisabled={isConnecting}>
     <svelte:fragment slot="icon">
       {#if !isConnected}
         {#if walletAdapter}
@@ -171,7 +171,7 @@
       {/if}
     </svelte:fragment>
     {isConnected ? walletName || truncatedWalletAddress : status}
-  </ButtonWithIcon>
+  </Button>
   {#if isDropDrownVisible}
     <!-- TODO: fix accessability and remove the warning below -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->

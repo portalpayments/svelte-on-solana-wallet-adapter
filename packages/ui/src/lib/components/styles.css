@@ -16,3 +16,40 @@
   --modal-background-color: white;
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+  
+/* This is any button in the wallet adapter, including the 'Connect a wallet on Solana to continue' buttons
+The styling should be very boring and minimal */
+button {
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--fonts);
+  font-size: 16px;
+  font-weight: 600;
+  height: var(--height);
+  line-height: var(--height);
+  padding-left: 24px;
+  padding-right: 24px;
+  border-radius: var(--border-radius);
+  justify-content: space-between;
+}
+
+button:not([disabled]):focus-visible {
+  outline-color: white;
+}
+
+button:not([disabled]):hover {
+  background-color: var(--hover-background-color);
+  color: var(--hover-text-color);
+}
+
+button[disabled] {
+  background-color: linear-gradient(90deg, #999, #666);
+  background-origin: border-box;
+  color: var(--disabled-text-color);
+  cursor: not-allowed;
+}
