@@ -2,11 +2,11 @@
 
 > A (hopefully temporary) fork of https://github.com/svelte-on-solana/wallet-adapter with a large amount of fixes, built for current JS standards and tooling (fixing warnings, using normal JS formatting, npm, ESM, current SvelteKit, updated documentation, etc).
 
-Notable changes:
+## Changelog - v2 
 
  - Support wallet names.
  - Support profile pictures ('PFPs').
- - Wallet adapters that are installed are shown first
+ - Wallet adapters that are installed are shown first.
  - Old types are in the process of being renamed. Eg wallet adapters are called 'WalletAdapter' not 'wallet'. This is intended to make code easier to read, avoiding code that confuses wallet adapters with wallet addresses.
  - TODO: support wallet standard, as individual wallet adapters are no longer necessary.
 
