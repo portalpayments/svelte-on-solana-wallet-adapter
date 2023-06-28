@@ -26,16 +26,13 @@
 <header>
   <title>{appName}</title>
   <div class="user">
-    {#if $walletStore?.connected}
-      <WalletButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
-    {/if}
+    <WalletButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
   </div>
 </header>
 
 <main>
   {#if !$walletStore?.connected}
     <h1>Sign in with your Solana<br /> wallet to continue.</h1>
-    <WalletButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
   {:else}
     Connected to {$walletStore.publicKey.toBase58()}.
   {/if}
