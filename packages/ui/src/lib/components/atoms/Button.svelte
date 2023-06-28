@@ -46,12 +46,12 @@
     border-radius: 0px 24px 24px 0px;
     width: 20%;
     opacity: 0;
-    background: linear-gradient(90deg, #ffffff00, #9945ff22);
+    background: linear-gradient(90deg, #ffffff00, #9945ff11);
     transform-origin: left center;
   }
 
   button.is-loading-name-and-profile-picture .sweeper {
-    animation: sweep 3000ms ease-out 0s infinite normal none;
+    animation: sweep 1000ms ease-out 0s infinite normal none;
   }
 
   .icon {
@@ -82,37 +82,17 @@
     0% {
       width: 20%;
       opacity: 0;
-      background: linear-gradient(90deg, #ffffff00, #9945ff22);
+      background: linear-gradient(90deg, #ffffff00, #9945ff11);
     }
 
-    32% {
-      width: 100%;
-      opacity: 1;
-      background: linear-gradient(90deg, #ffffff00, #9945ff22);
-    }
-
-    33% {
-      width: 20%;
-      opacity: 0;
-      background: linear-gradient(90deg, #ffffff00, #00c2ff22);
-    }
-
-    65% {
-      width: 100%;
-      opacity: 1;
-      background: linear-gradient(90deg, #ffffff00, #00c2ff22);
-    }
-
-    66% {
-      width: 20%;
-      opacity: 0;
-      background: linear-gradient(90deg, #ffffff00, #14f19522);
+    50% {
+      background: linear-gradient(90deg, #ffffff00, #00c2ff11);
     }
 
     100% {
       width: 100%;
       opacity: 1;
-      background: linear-gradient(90deg, #ffffff00, #14f19522);
+      background: linear-gradient(90deg, #ffffff00, #14f19511);
     }
   }
 
