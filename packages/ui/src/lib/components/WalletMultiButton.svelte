@@ -136,7 +136,7 @@ TODO: fix wallet-adapter-core -->
 {:else if !walletAddress}
   <WalletConnectButton />
 {:else}
-  <div class="wallet-adapter-dropdown">
+  <div class="dropdown">
     <Button buttonVersion="capsule" on:click={openDropdown}>
       <svelte:fragment slot="icon">
         {#if profilePicture}
@@ -153,7 +153,7 @@ TODO: fix wallet-adapter-core -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <ul
         aria-label="dropdown-list"
-        class="wallet-adapter-dropdown-list wallet-adapter-dropdown-list-active"
+        class="dropdown-list dropdown-list-active"
         role="menu"
         use:setClickHandlerForOutsideElement={() => {
           if (isDropDrownVisible) {
@@ -162,19 +162,17 @@ TODO: fix wallet-adapter-core -->
         }}
       >
         {#if walletName}
-          <li on:click={copyWalletName} class="wallet-adapter-dropdown-list-item" role="menuitem">
+          <li on:click={copyWalletName} class="dropdown-list-item" role="menuitem">
             {hasRecentlyCopiedWalletName ? "Copied" : "Copy wallet name"}
           </li>
         {/if}
         {#if !walletName && !hideWalletAddressIfUserHasName}
-          <li on:click={copyWalletAddress} class="wallet-adapter-dropdown-list-item" role="menuitem">
+          <li on:click={copyWalletAddress} class="dropdown-list-item" role="menuitem">
             {hasRecentlyCopiedWalletAddress ? "Copied" : "Copy wallet address"}
           </li>
         {/if}
-        <li on:click={openModal} class="wallet-adapter-dropdown-list-item" role="menuitem">
-          Connect a different wallet
-        </li>
-        <li on:click={disconnectWalletAdapter} class="wallet-adapter-dropdown-list-item" role="menuitem">Disconnect</li>
+        <li on:click={openModal} class="dropdown-list-item" role="menuitem">Connect a different wallet</li>
+        <li on:click={disconnectWalletAdapter} class="dropdown-list-item" role="menuitem">Disconnect</li>
       </ul>
     {/if}
   </div>
@@ -185,12 +183,12 @@ TODO: fix wallet-adapter-core -->
 {/if}
 
 <style>
-  .wallet-adapter-dropdown {
+  .dropdown {
     position: relative;
     display: inline-block;
   }
 
-  .wallet-adapter-dropdown-list {
+  .dropdown-list {
     color: var(--text-color);
     background-color: var(--background-color);
     position: absolute;
@@ -211,13 +209,13 @@ TODO: fix wallet-adapter-core -->
     font-family: var(--fonts);
   }
 
-  .wallet-adapter-dropdown-list-active {
+  .dropdown-list-active {
     opacity: 1;
     visibility: visible;
     transform: translateY(10px);
   }
 
-  .wallet-adapter-dropdown-list-item {
+  .dropdown-list-item {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -236,7 +234,7 @@ TODO: fix wallet-adapter-core -->
     color: var(--text-color);
   }
 
-  .wallet-adapter-dropdown-list-item:not([disabled]):hover {
+  .dropdown-list-item:not([disabled]):hover {
     background-color: var(--hover-background-color);
   }
 </style>
