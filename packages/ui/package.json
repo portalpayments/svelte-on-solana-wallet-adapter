@@ -31,7 +31,7 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@portal-payments/solana-wallet-names": "^2.0.4",
+    "@portal-payments/solana-wallet-names": "^2.1.0",
     "@solana/web3.js": "^1.77.3",
     "eventemitter3": "^4.0.7",
     "svelte": "^3.46.2"
