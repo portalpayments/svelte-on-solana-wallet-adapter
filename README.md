@@ -20,7 +20,7 @@ Updated original docs below:
 
 ## Packages
 
-- [Core](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/core/README.md/) - Svelte Store which exposes methods and properties to connect to wallet adapters  your application
+- [Core](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/core/README.md/) - Svelte Store which exposes methods and properties to connect to wallet adapters in your application
 - [UI](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/ui/README.md) - Pre-built components for integrating with Solana wallets using Svelte
 - [Anchor](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) - Helper components for working with Anchor
 
