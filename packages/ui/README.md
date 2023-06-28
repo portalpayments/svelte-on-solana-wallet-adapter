@@ -16,10 +16,8 @@ During this process, you will:
 
 ## Installing
 
-You have already installed the core package to run the wallet Svelte Store [@portal-payments/wallet-adapter-core](github.com/svelte-on-solana/wallet-adapter/blob/master/packages/core/README.md). Then install the UI components contained in this package
-
-```shell
-npm i @portal-payments/wallet-adapter-ui
+```bash
+npm i @portal-payments/wallet-adapter-core @portal-payments/wallet-adapter-ui
 ```
 
 ## Set Up
@@ -30,41 +28,43 @@ There are three components that you need to get set up:
 - `ConnectionProvider` ([`AnchorConnectionProvider`](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) if you're using Anchor)
 - `WalletButton`
 
+### Components
+
 #### `WalletProvider` 
 
-A component used to initialize the wallet stores and add event listeners
+Used to initialize the wallet stores and add event listeners.
 
-| prop             | type        | default           |
-| ---------------- | ----------- | ----------------- |
-| localStorageKey? | `string`    | `'walletAdapter'` |
-| wallets          | `Wallets[]` |                   |
-| autoConnect?     | `boolean`   | `false`           |
+Props:
+
+  - `wallets`, type: `Array<Adapter>`, default: `[]`
+  - `localStorageKey` (optional), type: `string`, default: `'walletAdapter'` 
+  - `autoConnect`  (optional), type: `boolean`, default: `false`
 
 #### `ConnectionProvider` 
 
-A component used to establish a connection with the network.
+Establish a connection with the Solana network.
 
-| prop    | type     | default |
-| ------- | -------- | ------- |
-| network | `string` |         |
+Props:
+
+ - `network`, type: `string`, default: none
 
 #### `AnchorConnectionProvider`
 
-Alternatively you can use `AnchorConnectionProvider` for Anchor Dapps.
+Like `ConnectionProvider` for Anchor Dapps.
 
-| prop    | type     | default |
-| ------- | -------- | ------- |
-| network | `string` |         |
-| idl     | `Idl`    |         |
+Props:
+
+- `network`, type: `string`, default:
+- `idl`, type: `Idl`, default:
 
 #### `WalletButton` 
 
-A component used as the entry point to connect/disconnect a wallet app.
+A button for users to connectand disconnect their wallet apps.
 
-| prop                                  | type       | default |
-| ------------------------------------- | -----------| ------- |
-| maxNumberOfWallets                    | `number`   | `3`     |
-| walletAddressToNameAndProfilePicture  | `Function` | See TS  |
+Props:
+
+  - `maxNumberOfWallets`, type: `number`, default: `3`.
+  - `walletAddressToNameAndProfilePicture`, type: `Function`, default: function that returns `null` for both.
 
 ## SvelteKit
 
