@@ -136,7 +136,7 @@ TODO: fix wallet-adapter-core -->
 {:else if !walletAddress}
   <WalletConnectButton />
 {:else}
-  <div class="dropdown">
+  <div class="connected-wallet-with-dropdown">
     <Button buttonVersion="capsule" on:click={openDropdown}>
       <svelte:fragment slot="icon">
         {#if profilePicture}
@@ -183,7 +183,7 @@ TODO: fix wallet-adapter-core -->
 {/if}
 
 <style>
-  .dropdown {
+  .connected-wallet-with-dropdown {
     position: relative;
     display: inline-block;
   }
