@@ -28,7 +28,7 @@
 
   // wallet is a WalletAdapter
   // TODO: fix wallet-adapter-core
-  $: ({ publicKey, wallet, disconnect, connect, select } = $walletStore);
+  $: ({ publicKey, wallet: walletAdapter, disconnect, connect, select } = $walletStore);
 
   let isDropDrownVisible = false,
     isModalVisible = false,
@@ -127,9 +127,7 @@
   };
 </script>
 
-<!-- Really 'wallet' means 'walletAdapter'
-TODO: fix wallet-adapter-core -->
-{#if !wallet}
+{#if !walletAdapter}
   <Button buttonVersion="capsule" on:click={openModal}>
     <slot>Connect wallet</slot>
   </Button>
@@ -143,7 +141,7 @@ TODO: fix wallet-adapter-core -->
           <img class="profile-picture" src={profilePicture} alt={truncatedWalletAddress} />
         {:else}
           <!-- Show the wallet *adapter* icon and wallet *adapter* name -->
-          <img class="wallet-adapter-icon" src={wallet.icon} alt={`${wallet.name} icon`} />
+          <img class="wallet-adapter-icon" src={walletAdapter.icon} alt={`${walletAdapter.name} icon`} />
         {/if}
       </svelte:fragment>
       {walletName || truncatedWalletAddress}
