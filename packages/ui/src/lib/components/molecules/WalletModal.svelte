@@ -3,7 +3,7 @@
   import { byInstalledStatus } from "../../utils";
   import { walletStore } from "@portal-payments/wallet-adapter-core";
   import { createEventDispatcher } from "svelte";
-  import Button from "../atoms/Button.svelte";
+  import ButtonWithIcon from "../atoms/ButtonWithIcon.svelte";
   import GenericWalletPicture from "../atoms/GenericWalletPicture.svelte";
   import RotatingArrow from "../atoms/RotatingArrow.svelte";
   import CloseButton from "../atoms/CloseButton.svelte";
@@ -85,7 +85,7 @@
       <h1 class="wallet-adapter-modal-title">Connect a wallet on Solana to continue</h1>
       <div class="wallet-adapters">
         {#each installedWalletAdaptersWithReadyState as walletAdapterWithReadyState}
-          <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+          <ButtonWithIcon buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
             {walletAdapterWithReadyState.adapter.name}
 
             <svelte:fragment slot="icon">
@@ -101,7 +101,7 @@
                 {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
               </div>
             </svelte:fragment>
-          </Button>
+          </ButtonWithIcon>
         {/each}
       </div>
       {#if uninstalledWalletAdaptersWithReadyState.length}
@@ -122,7 +122,7 @@
       {#if isShowingUninstalledWallets}
         <div class="wallet-adapters" transition:slide={{ duration: 300 }}>
           {#each uninstalledWalletAdaptersWithReadyState as walletAdapterWithReadyState}
-            <Button buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
+            <ButtonWithIcon buttonVersion="option" on:click={() => connect(walletAdapterWithReadyState.adapter.name)}>
               {walletAdapterWithReadyState.adapter.name}
 
               <svelte:fragment slot="icon">
@@ -138,7 +138,7 @@
                   {walletAdapterWithReadyState.readyState === "Installed" ? "Detected" : ""}
                 </div>
               </svelte:fragment>
-            </Button>
+            </ButtonWithIcon>
           {/each}
         </div>
       {/if}

@@ -1,11 +1,4 @@
 <script lang="ts">
-  // TODO: this is a single component re-used for WILDLY differing circumstances.
-  // - the 'Select wallet' (or 'Connect wallet') button
-  //   class is 'wallet-adapter-button-trigger'
-  // - the 'Connected' button
-  //   class is 'wallet-adapter-button-trigger'
-  // - every button with a wallet to connect to option in the modal
-  //   class is 'wallet-adapter-choice'
   export let isDisabled: boolean = false;
 
   export let buttonVersion: "capsule" | "option" = "capsule";

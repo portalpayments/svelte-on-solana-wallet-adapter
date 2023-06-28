@@ -1,6 +1,6 @@
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import Button from "./atoms/Button.svelte";
+  import ButtonWithIcon from "./atoms/ButtonWithIcon.svelte";
   import WalletModal from "./molecules/WalletModal.svelte";
   import { copyToClipboard, truncateWalletAddress, sleep, stringify } from "../utils";
   import type { PublicKey } from "@solana/web3.js";
@@ -154,7 +154,11 @@
 </script>
 
 <div class="connected-wallet-with-dropdown">
-  <Button buttonVersion="capsule" on:click={isConnected ? openDropdown : showConnectionUI} isDisabled={isConnecting}>
+  <ButtonWithIcon
+    buttonVersion="capsule"
+    on:click={isConnected ? openDropdown : showConnectionUI}
+    isDisabled={isConnecting}
+  >
     <svelte:fragment slot="icon">
       {#if !isConnected}
         {#if walletAdapter}
@@ -167,7 +171,7 @@
       {/if}
     </svelte:fragment>
     {isConnected ? walletName || truncatedWalletAddress : status}
-  </Button>
+  </ButtonWithIcon>
   {#if isDropDrownVisible}
     <!-- TODO: fix accessability and remove the warning below -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
