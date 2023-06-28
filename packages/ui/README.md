@@ -12,7 +12,7 @@ During this process, you will:
 - 📦 Install the svelte adapter and svelte UI
 - 🔨 Add the `ConnectionProvider` ([`AnchorConnectionProvider`](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) if you're using Anchor)
 - 🔨 Add the `WalletProvider` component
-- 🔨 Add the `WalletMultiButton` component
+- 🔨 Add the `WalletButton` component
 
 ## Installing
 
@@ -28,7 +28,7 @@ There are three components that you need to get set up:
 
 - `WalletProvider`
 - `ConnectionProvider` ([`AnchorConnectionProvider`](https://github.com/svelte-on-solana/wallet-adapter/blob/master/packages/anchor/README.md) if you're using Anchor)
-- `WalletMultiButton`
+- `WalletButton`
 
 #### `WalletProvider` 
 
@@ -57,7 +57,7 @@ Alternatively you can use `AnchorConnectionProvider` for Anchor Dapps.
 | network | `string` |         |
 | idl     | `Idl`    |         |
 
-#### `WalletMultiButton` 
+#### `WalletButton` 
 
 A component used as the entry point to connect/disconnect a wallet app.
 
@@ -118,7 +118,7 @@ And then in the **\_\_layout.svelte** component you can import the wallets and s
 <script lang="ts">
   import { onMount } from "svelte";
   import { clusterApiUrl } from "@solana/web3.js";
-  import { workSpace, WalletProvider, WalletMultiButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
+  import { workSpace, WalletProvider, WalletButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
 
   const localStorageKey = "walletAdapter";
   const network = clusterApiUrl("devnet"); // localhost or mainnet
@@ -151,7 +151,7 @@ And then in the **\_\_layout.svelte** component you can import the wallets and s
 <div>
   <slot />
 </div>
-<WalletMultiButton />
+<WalletButton />
 ```
 
 ## Svelte Template
@@ -208,7 +208,7 @@ export default {
 ```html
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import { workSpace, WalletProvider, WalletMultiButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
+  import { workSpace, WalletProvider, WalletButton, ConnectionProvider } from "@portal-payments/wallet-adapter-ui";
   import { clusterApiUrl } from "@solana/web3.js";
   import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
 
@@ -220,7 +220,7 @@ export default {
 
 <WalletProvider {localStorageKey} {wallets} autoConnect />
 <ConnectionProvider {network} />
-<WalletMultiButton />
+<WalletButton />
 
 {#if $walletStore?.connected}
 <div>My wallet is connected</div>

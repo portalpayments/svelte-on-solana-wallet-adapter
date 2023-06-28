@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { WalletMultiButton, workSpace } from '@portal-payments/wallet-adapter-ui';
+  import { WalletButton, workSpace } from '@portal-payments/wallet-adapter-ui';
   import { walletAddressToNameAndProfilePicture } from '@portal-payments/solana-wallet-names';
   import type { PublicKey } from '@solana/web3.js';
   import { walletStore } from '@portal-payments/wallet-adapter-core';
@@ -27,7 +27,7 @@
   <title>{appName}</title>
   <div class="user">
     {#if $walletStore?.connected}
-      <WalletMultiButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
+      <WalletButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
     {/if}
   </div>
 </header>
@@ -35,7 +35,7 @@
 <main>
   {#if !$walletStore?.connected}
     <h1>Sign in with your Solana<br /> wallet to continue.</h1>
-    <WalletMultiButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
+    <WalletButton walletAddressToNameAndProfilePicture={walletAddressToNameAndProfilePictureWrapper} />
   {:else}
     Connected to {$walletStore.publicKey.toBase58()}.
   {/if}

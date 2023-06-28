@@ -47,7 +47,7 @@ In the **\_\_layout.svelte** component you can import the wallets and setup the 
 ```html
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import { WalletProvider, WalletMultiButton } from "@portal-payments/wallet-adapter-ui";
+  import { WalletProvider, WalletButton } from "@portal-payments/wallet-adapter-ui";
   import { AnchorConnectionProvider, workSpace } from "@portal-payments/wallet-adapter-anchor";
   import { clusterApiUrl } from "@solana/web3.js";
   import idl from "../../../target/idl/<my-anchor-project>.json";
@@ -83,7 +83,7 @@ In the **\_\_layout.svelte** component you can import the wallets and setup the 
 <div>
   <slot />
 </div>
-<WalletMultiButton />
+<WalletButton />
 ```
 
 ## Svelte Template
@@ -93,7 +93,7 @@ In `App.svelte` or the entry point of your SPA, you can setup the wallet and com
 ```html
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
-  import { WalletProvider, WalletMultiButton } from "@portal-payments/wallet-adapter-ui";
+  import { WalletProvider, WalletButton } from "@portal-payments/wallet-adapter-ui";
   import { AnchorConnectionProvider, workSpace } from "@portal-payments/wallet-adapter-anchor";
   import { clusterApiUrl } from "@solana/web3.js";
   import idl from "../../../target/idl/<my-anchor-project>.json";
@@ -107,7 +107,7 @@ In `App.svelte` or the entry point of your SPA, you can setup the wallet and com
 
 <WalletProvider {localStorageKey} {wallets} autoConnect />
 <AnchorConnectionProvider {network} {idl} />
-<WalletMultiButton />
+<WalletButton />
 
 {#if $walletStore?.connected}
 <div>My wallet is connected</div>
