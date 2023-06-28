@@ -150,7 +150,6 @@
 
   let status: string;
   let icon: string | null;
-  let isIconAProfilePicture = false;
 
   $: {
     status = "Connect wallet";
@@ -163,7 +162,6 @@
     if (isConnected) {
       status = walletName || truncatedWalletAddress;
       if (profilePicture) {
-        isIconAProfilePicture = true;
         icon = profilePicture;
       } else {
         icon = walletAdapter?.icon;
@@ -182,7 +180,6 @@
     isDisabled={isConnecting}
     {icon}
     {isLoadingNameAndProfilePicture}
-    {isIconAProfilePicture}
     {status}
   />
   {#if isDropDrownVisible}

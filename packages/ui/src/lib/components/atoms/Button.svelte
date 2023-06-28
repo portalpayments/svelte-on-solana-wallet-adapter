@@ -3,7 +3,6 @@
   export let status: string | null = null;
   export let icon: string | null = null;
   export let isLoadingNameAndProfilePicture: boolean = false;
-  export let isIconAProfilePicture: boolean = false;
   export let isDisabled: boolean = false;
 </script>
 
@@ -13,8 +12,8 @@
   on:click
 >
   <div class="sweeper" />
-  {#if icon}
-    <img class={`icon ${isIconAProfilePicture ? "profile-picture" : ""}`} src={icon} alt="icon" />
+  {#if icon && status !== "Connect wallet"}
+    <img class="icon" src={icon} alt="icon" />
   {/if}
   <div class={`status ${status !== "Connect wallet" ? "sliding" : ""}`}>{status}</div>
 </button>
@@ -37,6 +36,11 @@
     border: 2px solid transparent;
   }
 
+  button:has(.icon) {
+    padding-left: 4px;
+    padding-right: 16px;
+  }
+
   .sweeper {
     position: absolute;
     left: 0;
@@ -46,7 +50,7 @@
     border-radius: 0px 24px 24px 0px;
     width: 20%;
     opacity: 0;
-    background: linear-gradient(90deg, #ffffff00, #9945ff11);
+    background: linear-gradient(90deg, #ffffff00, #9945ff22);
     transform-origin: left center;
   }
 
@@ -58,22 +62,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
+    width: 38px;
+    border-radius: 50%;
     aspect-ratio: 1;
     animation: fadeInAndScale 500ms;
   }
-
-  button:has(.profile-picture) {
-    padding-left: 4px;
-    padding-right: 16px;
-  }
-
-  /* User pictures are bigger and round */
-  .icon.profile-picture {
-    border-radius: 50%;
-    width: 38px;
-  }
-
   .status.sliding {
     animation: fadeInAndSlide 500ms;
   }
@@ -82,17 +75,17 @@
     0% {
       width: 20%;
       opacity: 0;
-      background: linear-gradient(90deg, #ffffff00, #9945ff11);
+      background: linear-gradient(90deg, #ffffff00, #9945ff22);
     }
 
     50% {
-      background: linear-gradient(90deg, #ffffff00, #00c2ff11);
+      background: linear-gradient(90deg, #ffffff00, #00c2ff22);
     }
 
     100% {
       width: 100%;
       opacity: 1;
-      background: linear-gradient(90deg, #ffffff00, #14f19511);
+      background: linear-gradient(90deg, #ffffff00, #14f19522);
     }
   }
 
