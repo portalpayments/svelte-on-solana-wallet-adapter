@@ -1,7 +1,6 @@
 <script lang="ts">
   import { walletStore } from "@portal-payments/wallet-adapter-core";
   import Button from "./atoms/Button.svelte";
-  import WalletConnectButton from "./molecules/WalletConnectButton.svelte";
   import WalletModal from "./molecules/WalletModal.svelte";
   import { copyToClipboard, truncateWalletAddress, sleep } from "../utils";
   import type { PublicKey } from "@solana/web3.js";
@@ -28,7 +27,15 @@
 
   // wallet is a WalletAdapter
   // TODO: fix wallet-adapter-core
-  $: ({ publicKey, wallet: walletAdapter, disconnect, connect, select } = $walletStore);
+  $: ({
+    publicKey,
+    wallet: walletAdapter,
+    connecting: isConnecting,
+    connected: isConnected,
+    disconnect,
+    connect,
+    select,
+  } = $walletStore);
 
   let isDropDrownVisible = false,
     isModalVisible = false,
@@ -139,11 +146,25 @@
     }
   };
 
-  $: isConnected = Boolean(walletAddress) && Boolean(walletAdapter);
+  let status: string;
+  $: {
+    status = "Connect wallet";
+    if (walletAdapter) status = "Connect";
+    if (isConnecting) status = "Connecting…";
+    if (isConnected) status = "Connected";
+  }
 </script>
 
 {#if !isConnected}
-  <WalletConnectButton {handleClick} />
+  <Button buttonVersion="capsule" on:click={handleClick} isDisabled={isConnecting}>
+    <svelte:fragment slot="icon">
+      {#if walletAdapter}
+        <img src={walletAdapter.icon} class="wallet-adapter-icon" alt={`${walletAdapter.name} icon`} />
+      {/if}
+    </svelte:fragment>
+
+    {status}
+  </Button>
 {:else}
   <div class="connected-wallet-with-dropdown">
     <Button buttonVersion="capsule" on:click={openDropdown}>
