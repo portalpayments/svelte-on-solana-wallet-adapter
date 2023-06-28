@@ -149,27 +149,28 @@
   };
 
   let status: string;
-  $: {
-    status = "Connect wallet";
-    if (walletAdapter) status = "Connect";
-    if (isConnecting) status = "Connecting…";
-    if (isConnected) status = walletName || truncatedWalletAddress;
-  }
-
   let icon: string | null;
   let isIconAProfilePicture = false;
 
   $: {
-    if (!isConnected) {
-      if (walletAdapter) {
-        icon = walletAdapter.icon;
-      }
-    } else {
+    status = "Connect wallet";
+    if (walletAdapter) {
+      status = "Connect";
+    }
+    if (isConnecting) {
+      status = "Connecting…";
+    }
+    if (isConnected) {
+      status = walletName || truncatedWalletAddress;
       if (profilePicture) {
-        icon = profilePicture;
         isIconAProfilePicture = true;
+        icon = profilePicture;
       } else {
         icon = walletAdapter?.icon;
+      }
+    } else {
+      if (walletAdapter) {
+        icon = walletAdapter.icon;
       }
     }
   }
@@ -182,7 +183,7 @@
     {icon}
     {isLoadingNameAndProfilePicture}
     {isIconAProfilePicture}
-    text={status}
+    {status}
   />
   {#if isDropDrownVisible}
     <!-- TODO: fix accessability and remove the warning below -->
