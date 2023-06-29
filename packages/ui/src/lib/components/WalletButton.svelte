@@ -84,7 +84,8 @@
     isModalVisible = false;
   };
 
-  let isLoadingNameAndProfilePicture = false;
+  let isLoadingNameAndProfilePicture: boolean;
+  $: isLoadingNameAndProfilePicture = false;
 
   walletStore.subscribe(async (newValue) => {
     const walletAddress = newValue.publicKey?.toBase58();
@@ -97,7 +98,8 @@
     truncatedWalletAddress = truncateWalletAddress(walletAddress);
     isLoadingNameAndProfilePicture = true;
     const walletNameAndProfilePicture = await walletAddressToNameAndProfilePicture(newValue.publicKey);
-    walletName = walletNameAndProfilePicture.walletName;
+    // HACK: this is a hack to get around glow weirdly being selected first
+    walletName = "mikemaccana.abc"; //  walletNameAndProfilePicture.walletName;
     profilePicture = walletNameAndProfilePicture.profilePicture;
     isLoadingNameAndProfilePicture = false;
   });
@@ -109,6 +111,7 @@
   };
 
   const disconnectWalletAdapter = async (event) => {
+    isLoadingNameAndProfilePicture = false;
     closeDropdown();
     await disconnect();
   };
@@ -149,7 +152,7 @@
   };
 
   let status: string;
-  let icon: string | null;
+  let walletAdapterIcon: string | null;
 
   $: {
     status = "Connect wallet";
@@ -161,14 +164,10 @@
     }
     if (isConnected) {
       status = walletName || truncatedWalletAddress;
-      if (profilePicture) {
-        icon = profilePicture;
-      } else {
-        icon = walletAdapter?.icon;
-      }
+      walletAdapterIcon = walletAdapter?.icon;
     } else {
       if (walletAdapter) {
-        icon = walletAdapter.icon;
+        walletAdapterIcon = walletAdapter?.icon;
       }
     }
   }
@@ -178,7 +177,8 @@
   <Button
     on:click={isConnected ? openDropdown : showConnectionUI}
     isDisabled={isConnecting}
-    {icon}
+    {walletAdapterIcon}
+    {profilePicture}
     {isLoadingNameAndProfilePicture}
     {status}
   />

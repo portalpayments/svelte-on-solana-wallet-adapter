@@ -14,6 +14,8 @@ export const stringify = (object: any) => {
   return JSON.stringify(object, null, 2);
 };
 
+export const log = console.log;
+
 export const byInstalledStatus = (a, b) => {
   if (a.readyState === "Installed" && b.readyState !== "Installed") {
     return -1;
